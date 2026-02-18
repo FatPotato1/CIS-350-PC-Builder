@@ -1,4 +1,4 @@
-"main file: Launch UI, control flow, handle starting everything"
+#main file: Launch UI, control flow, handle starting everything
 from ui import UI
 
 def main():
