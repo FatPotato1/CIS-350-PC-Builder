@@ -3,5 +3,5 @@ CIS-350 semester project
 
 Create list of parts to meet minimum/recommended specs or fps targets for various games  
 
-Libaries used:
+Libaries used:  
 Tkinter: GUI development
