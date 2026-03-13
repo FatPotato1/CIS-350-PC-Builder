@@ -5,15 +5,16 @@
 # UI library used: Tkinter
 
 
+import ttkbootstrap as ttk
+from ttkbootstrap.constants import *
 import tkinter as tk
-from tkinter import ttk
 from components import hardware
 
 
 class UI:
 
     def __init__(self):
-        self.root = tk.Tk()
+        self.root = ttk.Window(themename="darkly")
         self.root.title("PC Builder")
         self.root.geometry("800x500")
         self._create_layout()
@@ -25,7 +26,7 @@ class UI:
         main_frame.pack(fill=tk.BOTH, expand=True)
 
         #left panel for component selection
-        left_frame = ttk.LabelFrame(main_frame, text="Components", padding=10)
+        left_frame = ttk.LabelFrame(main_frame, text="Components")
         left_frame.pack(side=tk.LEFT, fill=tk.Y)
 
         ttk.Label(left_frame, text="Select Component Type").pack(anchor="w")
@@ -61,7 +62,7 @@ class UI:
         ).pack(fill=tk.X, pady=5)
 
         #build summary
-        right_frame = ttk.LabelFrame(main_frame, text="Current Build", padding=10)
+        right_frame = ttk.LabelFrame(main_frame, text="Current Build")
         right_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
 
         self.build_list = tk.Listbox(right_frame)
