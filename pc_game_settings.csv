@@ -1,0 +1,21 @@
+game_name,min_cpu,rec_cpu,min_gpu,rec_gpu,min_ram_gb,rec_ram_gb,storage_gb
+Fortnite,Intel i3-3225 ,Intel i5-7300U,Intel HD 4000,NVIDIA GTX 960,8,16,72
+Call of Duty Warzone,Intel i3-6100,Intel i5-6600K,NVIDIA GTX 960,NVIDIA GTX 1060,8,12,125
+Cyberpunk 2077,Intel i7-6700,Intel i7-12700,NVIDIA GTX 1060,NVIDIA RTX 2060 SUPER,12,16,70
+Minecraft,Intel i3-3210,Intel i5-4690,NVIDIA 700 Series,NVIDIA GTX 960,8,8,4
+Grand Theft Auto V,Intel i7-4770,Intel i5-9600K,NVIDIA GTX 1630,NVIDIA RTX 3060,8,16,105
+Apex Legends,Intel i3-6300,Ryzen 5,NVIDIA GTX 950,NVIDIA GTX 970,6,8,75
+Valorant,,,,,,,
+Counter-Strike 2,,,,,,,
+Elden Ring,,,,,,,
+Red Dead Redemption 2,,,,,,,
+Starfield,,,,,,,
+Baldurs Gate 3,,,,,,,
+Helldivers 2,,,,,,,
+Rainbow Six Siege,,,,,,,
+League of Lengends,,,,,,,
+Overwatch 2,,,,,,,
+Hogwarts Legacy,,,,,,,
+Forza Horizon 5,,,,,,,
+Destiny 2,,,,,,,
+Escape from Tarkov,,,,,,,
