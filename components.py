@@ -75,28 +75,29 @@ hardware = {
     "NVIDIA": {
         "GPUs": [
             {
-                "name": "GeForce RTX 5090",
+                "name": "RTX 5090",
+                "generation": "Blackwell (RTX 5000 series)",
+                "segment": "desktop",
+                "architecture": "TSMC 4NP",
+                "release_year": 2025
+
+            },
+            {
+                "name": "RTX 5080",
                 "generation": "Blackwell (RTX 5000 series)",
                 "segment": "desktop",
                 "architecture": "TSMC 4NP",
                 "release_year": 2025
             },
             {
-                "name": "GeForce RTX 5080",
+                "name": "RTX 5070 Ti",
                 "generation": "Blackwell (RTX 5000 series)",
                 "segment": "desktop",
                 "architecture": "TSMC 4NP",
                 "release_year": 2025
             },
             {
-                "name": "GeForce RTX 5070 Ti",
-                "generation": "Blackwell (RTX 5000 series)",
-                "segment": "desktop",
-                "architecture": "TSMC 4NP",
-                "release_year": 2025
-            },
-            {
-                "name": "GeForce RTX 5060",
+                "name": "RTX 5060",
                 "generation": "Blackwell (RTX 5000 series)",
                 "segment": "desktop",
                 "architecture": "TSMC 4NP",
