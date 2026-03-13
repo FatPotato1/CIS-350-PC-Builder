@@ -5,3 +5,6 @@ Create list of parts to meet minimum/recommended specs or fps targets for variou
 
 Libaries used:  
 GUI: ttkbootstrap
+
+
+CPU and GPU csv data used from userbenchmark.com
