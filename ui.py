@@ -1,26 +1,24 @@
 #GUI built using Tkinter
-
-
 #Will contain all UI logic and code
 # UI library used: Tkinter
-
 
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 import tkinter as tk
 from components import hardware
-
+from compatibility import *
 
 class UI:
 
-    def __init__(self):
+    def __init__(self,games,rankings):
+        self.games = games
+        self.rankings = rankings
         self.root = ttk.Window(themename="darkly")
         self.root.title("PC Builder")
         self.root.geometry("800x500")
         self._create_layout()
 
     def _create_layout(self):
-
         #main field
         main_frame = ttk.Frame(self.root, padding=10)
         main_frame.pack(fill=tk.BOTH, expand=True)
