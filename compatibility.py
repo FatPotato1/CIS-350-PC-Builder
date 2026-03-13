@@ -1,4 +1,5 @@
 
+#return whether selected gpu meets min and/or recommended gpu
 def meets_requirements(selected_gpu, min_gpu, rec_gpu, rankings):
 
     selected = rankings.get(selected_gpu)

@@ -1,7 +1,4 @@
-#Will contain list of components
-
-#temporary data for testing, this will likely include accessing
-#and handling of json/csv saved datasets in the future")
+#Hardware that the user will be able to choose from
 
 hardware = {
     "Intel": {
