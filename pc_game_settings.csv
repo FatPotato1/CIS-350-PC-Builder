@@ -2,20 +2,19 @@ game_name,min_cpu,rec_cpu,min_gpu,rec_gpu,min_ram_gb,rec_ram_gb,storage_gb
 Fortnite,Intel i3-3225 ,Intel i5-7300U,Intel HD 4000,NVIDIA GTX 960,8,16,72
 Call of Duty Warzone,Intel i3-6100,Intel i5-6600K,NVIDIA GTX 960,NVIDIA GTX 1060,8,12,125
 Cyberpunk 2077,Intel i7-6700,Intel i7-12700,NVIDIA GTX 1060,NVIDIA RTX 2060 SUPER,12,16,70
-Minecraft,Intel i3-3210,Intel i5-4690,NVIDIA 700 Series,NVIDIA GTX 960,8,8,4
+Minecraft Java Edition,Intel i3-3210,Intel i5-4690,Intel HD Graphics 4000,NVIDIA GTX 770,2,4,4
 Grand Theft Auto V,Intel i7-4770,Intel i5-9600K,NVIDIA GTX 1630,NVIDIA RTX 3060,8,16,105
 Apex Legends,Intel i3-6300,Ryzen 5,NVIDIA GTX 950,NVIDIA GTX 970,6,8,75
-Valorant,,,,,,,
-Counter-Strike 2,,,,,,,
-Elden Ring,,,,,,,
-Red Dead Redemption 2,,,,,,,
-Starfield,,,,,,,
-Baldurs Gate 3,,,,,,,
-Helldivers 2,,,,,,,
-Rainbow Six Siege,,,,,,,
-League of Lengends,,,,,,,
-Overwatch 2,,,,,,,
-Hogwarts Legacy,,,,,,,
-Forza Horizon 5,,,,,,,
-Destiny 2,,,,,,,
-Escape from Tarkov,,,,,,,
+Valorant,Intel i3-540,Intel i3-4150,Intel HD 4000,NVIDIA GT 730,4,4,60
+Counter-Strike 2,Intel i5-750,Intel i7-9700K,Intel GD Graphics 4000,NVIDIA RTX 2070,8,8,85
+Elden Ring,Intel i5-8400,Intel i7-8700K,NVIDIA GTX 1060,NVIDIA GTX 1070 8GB,12,16,60
+Red Dead Redemption 2,Intel i5-2500K,Intel i7-4770K,NVIDIA GTX 770 2GB,NVIDIA GTX 1060 6GB,8,12,150
+Starfield, Intel i7-6800K,Intel i5-10600K,NVIDIA 1070 Ti,NVIDIA RTX 2080,16,16,125
+Baldurs Gate 3,Intel i5-4690,Intel i7 8700K,NVIDIA GTX 970,NVIDIA 2060 Super,8,16,150
+Helldivers 2,Intel i7-4790K,Intel i7-9700K,NVIDIA GTX 1050 Ti,NVIDIA RTX 2060,8,16,135
+Rainbow Six Siege,Intel i3-8100,Intel i5-10400,NVIDIA GTX 1650 4GB,NVIDIA RTX 2060 6GB,8,8,65
+League of Lengends,Intel i3-530,Intel i5-3300,NVIDIA 9600GT,NVIDIA GTX 560,2,4,16
+Hogwarts Legacy,Intel i5-6600,Intel i7-8700,NVIDIA GTX 960 4GB,NVIDIA 1080 Ti,16,16,85
+Forza Horizon 5,Intel i5-4460,Intel i5-8400,NVIDIA GTX 970,NVIDIA GTX 1070,8,16,110
+Destiny 2,Intel i3-3250,Intel i5-2400,NVIDIA GTX 660 2GB,NVIDIA GTX 970 4GB,6,8,105
+Escape from Tarkov,AMD Ryzen 5-3600,Intel i7-14700F,NVIDIA GTX 1660,NVIDIA RTX 4070,16,64,80
