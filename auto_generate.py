@@ -2,13 +2,34 @@ import components
 from data_loading import load_games, load_gpu_rankings
 
 #generate a list of parts for pc based on selected game and either min or recommended specs
-def generate_pc(game_name, target_performance, game_list, rankings):
+#this should be able to be modified somewhat easily to include amd gpus, all cpus, etc
+def generate_pc(game_name, target_performance, game_list, rankings,cpu_brand,gpu_brand):
+
+    return generate_gpu(game_name, target_performance, game_list, rankings, gpu_brand)
+
+
+def generate_cpu():
+    pass
+
+def generate_ram():
+    pass
+
+def generate_storage():
+    pass
+
+#needs to be modified to include amd gpus, currently data loader regex only does nvidia cards
+def generate_gpu(game_name, target_performance, game_list, rankings, gpu_brand):
+
     selected_gpu = None
     selected_score = None
     #list of gpus from components
-    gpus = components.hardware.get("NVIDIA GPUs", [])
+    if gpu_brand == "NVIDIA":
+
+        gpus = components.hardware.get("NVIDIA GPUs", [])
+    else:
+        gpus = components.hardware.get("AMD GPUs", [])
+
     game = None
-    required_gpu_model = ""
 
     #find the game in list
     for x in game_list:
@@ -42,7 +63,6 @@ def generate_pc(game_name, target_performance, game_list, rankings):
                 selected_score = gpu_score
 
     return selected_gpu
-
 
 #print(generate_pc("Fortnite","min",load_games(),load_gpu_rankings()))
 #print(generate_pc("Escape from Tarkov","rec",load_games(),load_gpu_rankings()))

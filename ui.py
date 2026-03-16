@@ -17,10 +17,12 @@ class UI:
         self.root.title("PC Builder")
         self.root.geometry("800x500")
         self._create_layout()
-
+        #main part data that is stored
         self.build = {
             "CPU": None,
+            "CPU_Brand": "Intel",
             "GPU": None,
+            "GPU_Brand": "NVIDIA",
             "Motherboard": None,
             "RAM": None,
             "Storage": None,
@@ -28,8 +30,9 @@ class UI:
             "Case": None
         }
         self.update_build_display()
-    def _create_layout(self):
 
+
+    def _create_layout(self):
         self.part_var = tk.StringVar()
         self.part_var.trace_add("write", self.add_component)
 
@@ -92,6 +95,18 @@ class UI:
         )
         self.component_menu.pack(fill=tk.X, pady=5)
 
+        #pick brands for parts
+        ttk.Label(left_frame, text="Select Brand").pack(anchor="w")
+
+        self.brand_var = tk.StringVar()
+        self.brand_menu = ttk.Combobox(
+            left_frame,
+            textvariable=self.brand_var,
+            state="readonly"
+        )
+        self.brand_menu.pack(fill=tk.X, pady=5)
+        self.brand_var.trace_add("write", self.update_part_dropdown)
+
         #part selection dropdown
         ttk.Label(left_frame, text="Select Part").pack(anchor="w")
 
@@ -109,42 +124,68 @@ class UI:
         self.build_list = tk.Text(right_frame, height=15, state="disabled")
         self.build_list.pack(fill=tk.BOTH, expand=True)
 
-        #placeholder save build button
+        #generate build button
         ttk.Button(
             right_frame,
-            text="Save Build",
-            command=self.save_build
+            text="Auto-generate Build",
+            command=self.generate_build
         ).pack(pady=5)
 
     def update_part_dropdown(self, *_):
-
         component = self.component_type.get()
-        parts = []
+        brand = self.brand_var.get()
 
+        #automatically update brand menu
         if component == "CPU":
-            parts = hardware.get("Intel CPUs", []) + hardware.get("AMD CPUs", [])
-
+            self.brand_menu["values"] = ["Intel", "AMD"]
+            if brand not in ["Intel", "AMD"]:
+                self.brand_var.set("")
         elif component == "GPU":
-            parts = hardware.get("NVIDIA GPUs", []) + hardware.get("AMD GPUs", [])
+            self.brand_menu["values"] = ["NVIDIA", "AMD"]
+            if brand not in ["NVIDIA", "AMD"]:
+                self.brand_var.set("")
+        else:
+            self.brand_menu["values"] = []
+            self.brand_var.set("")
 
-        #update the dropdown values and reset selection
+        if component in ("CPU", "GPU") and brand:
+            self.build[f"{component}_Brand"] = brand
+            self.update_build_display()
+        #fill in part menu based on brand selection
+        parts = []
+        if component == "CPU":
+            if brand == "Intel":
+                parts = hardware.get("Intel CPUs", [])
+            elif brand == "AMD":
+                parts = hardware.get("AMD CPUs", [])
+        elif component == "GPU":
+            if brand == "NVIDIA":
+                parts = hardware.get("NVIDIA GPUs", [])
+            elif brand == "AMD":
+                parts = hardware.get("AMD GPUs", [])
+        elif component == "Motherboard":
+            parts = hardware.get("Motherboards", [])
+        elif component == "RAM":
+            parts = hardware.get("RAM", [])
+        elif component == "Storage":
+            parts = hardware.get("Storage", [])
+        elif component == "PSU":
+            parts = hardware.get("PSU", [])
+        elif component == "Case":
+            parts = hardware.get("Cases", [])
+
         self.part_menu["values"] = parts
-        self.part_var.set("")
-
-    def add_component(self):
-        component = self.component_type.get()
-        part = self.part_var.get()
-
-        if component and part:
-            self.build_list.insert(tk.END, f"{component}: {part}")
+        if self.part_var.get() not in parts:
+            self.part_var.set("")
 
     def update_build_display(self):
 
         self.build_list.config(state="normal")
         self.build_list.delete("1.0", tk.END)
-        for component, part in self.build.items():
-            if part:
-                line = f"{component}: {part}\n"
+
+        for component, value in self.build.items():
+            if value:
+                line = f"{component}: {value}\n"
             else:
                 line = f"{component}: ---\n"
 
@@ -152,19 +193,23 @@ class UI:
 
         self.build_list.config(state="disabled")
 
+
     def add_component(self, *_):
         component = self.component_type.get()
         part = self.part_var.get()
+        brand = self.brand_var.get()
 
         if component and part:
             self.build[component] = part
+            if component in ["CPU", "GPU"]:
+                self.build[f"{component}_Brand"] = brand
             self.update_build_display()
 
     #using this temporarily to generate build
-    def save_build(self):
-        self.build["GPU"] = auto_generate.generate_pc(self.game_var.get(), self.requirement_level.get(), self.games, self.rankings)
+    def generate_build(self):
+        self.build["GPU"] = auto_generate.generate_pc(self.game_var.get(), self.requirement_level.get(),
+        self.games, self.rankings, self.build.get("CPU_Brand"),self.build.get("GPU_Brand"),)
         self.update_build_display()
 
     def run(self):
         self.root.mainloop()
-

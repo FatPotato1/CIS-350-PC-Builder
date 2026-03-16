@@ -43,6 +43,12 @@ def load_gpu_rankings():
 
     return rankings
 
+def load_cpu_rankings():
+    pass
+
+def extract_cpu_model():
+    pass
+
 
 #print(load_gpu_rankings())
 #print(load_games())
