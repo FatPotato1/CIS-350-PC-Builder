@@ -10,19 +10,19 @@ def load_games():
         reader = csv.DictReader(f)
         for row in reader:
             # new rows are created in list in order to make sure names match the fields in the other CSV
-            row["min_gpu_model"] = extract_gpu_model(row["min_gpu"])
-            row["rec_gpu_model"] = extract_gpu_model(row["rec_gpu"])
+            row["min_gpu_model"] = extract_gpu_model(row["min_gpu"].strip())
+            row["rec_gpu_model"] = extract_gpu_model(row["rec_gpu"].strip())
             games.append(row)
 
     return games
 
-#used chatgpt to figure out how to do python regexes because naming is inconsistent between different csvs
+#used chatgpt to generate python regexes because data is pretty inconsistent between different csvs
 #regex is used to make sure data is comparable and normalized
 def extract_gpu_model(name):
-    name = name.lower()
-    match = re.search(r'(rtx|gtx|rx|hd)\s?\d{3,4}', name)
+    name = name.lower().strip().replace("-", " ").replace("ti", " ti")
+    match = re.search(r'(rtx|gtx|rx|hd|gt)\s?\d{3,4}\s?(ti)?', name)
     if match:
-        return match.group()
+        return match.group().replace("  ", " ").strip()
     return None
 
 
@@ -35,7 +35,7 @@ def load_gpu_rankings():
 
         for row in reader:
             #only get entries that line up with regex
-            identifier = extract_gpu_model(row["Model"])
+            identifier = extract_gpu_model(row["Model"].strip())
 
             if identifier:
                 score = int(row["Rank"])
@@ -44,5 +44,5 @@ def load_gpu_rankings():
     return rankings
 
 
-print(load_gpu_rankings())
-print(load_games())
+#print(load_gpu_rankings())
+#print(load_games())

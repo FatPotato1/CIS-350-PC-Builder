@@ -6,7 +6,9 @@ import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 import tkinter as tk
 from components import hardware
+import auto_generate
 from compatibility import *
+import auto_generate
 
 class UI:
 
@@ -121,19 +123,11 @@ class UI:
         component = self.component_type.get()
         parts = []
 
-        # fill cpu fields
         if component == "CPU":
-            parts = (
-                [cpu["name"] for cpu in hardware["Intel"]["CPUs"]] +
-                [cpu["name"] for cpu in hardware["AMD"]["CPUs"]]
-            )
+            parts = hardware.get("Intel CPUs", []) + hardware.get("AMD CPUs", [])
 
-        #fill gpu fields
         elif component == "GPU":
-            parts = (
-                [gpu["name"] for gpu in hardware["NVIDIA"]["GPUs"]] +
-                [gpu["name"] for gpu in hardware["AMD"]["GPUs"]]
-            )
+            parts = hardware.get("NVIDIA GPUs", []) + hardware.get("AMD GPUs", [])
 
         #update the dropdown values and reset selection
         self.part_menu["values"] = parts
@@ -168,9 +162,10 @@ class UI:
             self.build[component] = part
             self.update_build_display()
 
+    #using this temporarily to generate build
     def save_build(self):
-        #placeholder, does not function yet
-        print("Build saved")
+        self.build["GPU"] = auto_generate.generate_pc(self.game_var.get(), self.requirement_level.get(), self.games, self.rankings)
+        self.update_build_display()
 
     def run(self):
         self.root.mainloop()
