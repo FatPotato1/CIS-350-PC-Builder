@@ -1,105 +1,31 @@
 #Hardware that the user will be able to choose from
 
 hardware = {
-    "Intel": {
-        "CPUs": [
-            {
-                "name": "Core Ultra 9 285K",
-                "generation": "Core Ultra Series 2 (Arrow Lake)",
-                "segment": "desktop",
-                "architecture": "Intel 20A",
-                "release_year": 2024
-            },
-            {
-                "name": "Core Ultra 7 265K",
-                "generation": "Core Ultra Series 2 (Arrow Lake)",
-                "segment": "desktop",
-                "architecture": "Intel 20A",
-                "release_year": 2024
-            },
-            {
-                "name": "Core Ultra 5 245K",
-                "generation": "Core Ultra Series 2 (Arrow Lake)",
-                "segment": "desktop",
-                "architecture": "Intel 20A",
-                "release_year": 2024
-            }
-        ]
-    },
+    "NVIDIA GPUs": [
+        "RTX 5090",
+        "RTX 5080",
+        "RTX 5070 Ti",
+        "RTX 5070",
+        "RTX 5060 Ti",
+        "RTX 5060",
+        "RTX 5050"
+    ],
 
-    "AMD": {
-        "CPUs": [
-            {
-                "name": "Ryzen 9 9950X",
-                "generation": "Zen 5",
-                "segment": "desktop",
-                "architecture": "TSMC 4nm",
-                "release_year": 2024
-            },
-            {
-                "name": "Ryzen 7 9700X",
-                "generation": "Zen 5",
-                "segment": "desktop",
-                "architecture": "TSMC 4nm",
-                "release_year": 2024
-            },
-            {
-                "name": "Ryzen 5 9600X",
-                "generation": "Zen 5",
-                "segment": "desktop",
-                "architecture": "TSMC 4nm",
-                "release_year": 2024
-            }
-        ],
-        "GPUs": [
-            {
-                "name": "Radeon RX 9070 XT",
-                "generation": "RDNA 4",
-                "segment": "desktop",
-                "architecture": "Monolithic",
-                "release_year": 2025
-            },
-            {
-                "name": "Radeon RX 9060 XT",
-                "generation": "RDNA 4",
-                "segment": "desktop",
-                "architecture": "Monolithic",
-                "release_year": 2025
-            }
-        ]
-    },
+    "AMD GPUs": [
+        "Radeon RX 9070 XT",
+        "Radeon RX 9070",
+        "Radeon RX 9060 XT",
+        "Radeon RX 9060"
+    ],
 
-    "NVIDIA": {
-        "GPUs": [
-            {
-                "name": "RTX 5090",
-                "generation": "Blackwell (RTX 5000 series)",
-                "segment": "desktop",
-                "architecture": "TSMC 4NP",
-                "release_year": 2025
+    "Intel CPUs": [
+        "Core Ultra 7 285K",
+        "Core Ultra 5 245K"
+    ],
 
-            },
-            {
-                "name": "RTX 5080",
-                "generation": "Blackwell (RTX 5000 series)",
-                "segment": "desktop",
-                "architecture": "TSMC 4NP",
-                "release_year": 2025
-            },
-            {
-                "name": "RTX 5070 Ti",
-                "generation": "Blackwell (RTX 5000 series)",
-                "segment": "desktop",
-                "architecture": "TSMC 4NP",
-                "release_year": 2025
-            },
-            {
-                "name": "RTX 5060",
-                "generation": "Blackwell (RTX 5000 series)",
-                "segment": "desktop",
-                "architecture": "TSMC 4NP",
-                "release_year": 2025
-            }
-        ]
-    }
+    "AMD CPUs": [
+        "Ryzen 9 9950X",
+        "Ryzen 7 9700X",
+        "Ryzen 5 9600X"
+    ]
 }

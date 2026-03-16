@@ -1,8 +1,7 @@
 #TODO: save build functionality (local database?)
-#TODO: area in gui that shows selected parts, color coded to distinguish compatible or not
 #TODO: log area in gui that displays what the errors are, if any
+#TODO: check current selected parts compatibility with min/recommended specs for selected game
 #TODO: costs of each part
-#TODO: dropdown for games in GUI
 #TODO: implementation and more functions in the compatibility file
 #TODO: testing data loading since it is kind of messy
 #TODO: error handling for a lot of stuff
