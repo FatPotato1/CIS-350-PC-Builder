@@ -7,8 +7,6 @@ from ttkbootstrap.constants import *
 import tkinter as tk
 from components import hardware
 import auto_generate
-from compatibility import *
-import auto_generate
 
 class UI:
 
