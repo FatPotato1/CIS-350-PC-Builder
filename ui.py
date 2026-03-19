@@ -10,9 +10,10 @@ import auto_generate
 
 class UI:
 
-    def __init__(self,games,rankings):
+    def __init__(self,games,cpu_rankings, gpu_rankings):
         self.games = games
-        self.rankings = rankings
+        self.cpu_rankings = cpu_rankings
+        self.gpu_rankings = gpu_rankings
         self.root = ttk.Window(themename="darkly")
         self.root.title("PC Builder")
         self.root.geometry("800x500")
@@ -207,8 +208,8 @@ class UI:
 
     #using this temporarily to generate build
     def generate_build(self):
-        self.build["GPU"] = auto_generate.generate_pc(self.game_var.get(), self.requirement_level.get(),
-        self.games, self.rankings, self.build.get("CPU_Brand"),self.build.get("GPU_Brand"),)
+        self.build["GPU"], self.build["CPU"] = auto_generate.generate_pc(self.game_var.get(), self.requirement_level.get(),
+        self.games, self.cpu_rankings, self.gpu_rankings, self.build.get("CPU_Brand"),self.build.get("GPU_Brand"),)
         self.update_build_display()
 
     def run(self):

@@ -11,13 +11,14 @@
 #TODO: possible optimization algorithm that can take budget and maximize performace, get minimum current hardware to play game, etc
 
 #main file: Launch UI, control flow, handle starting everything
-from data_loading import load_games, load_gpu_rankings
+from data_loading import load_games, load_gpu_rankings, load_cpu_rankings
 from ui import UI
 
 def main():
     games = load_games()
-    rankings = load_gpu_rankings()
-    UI(games, rankings).run()
+    gpu_rankings = load_gpu_rankings()
+    cpu_rankings = load_cpu_rankings()
+    UI(games, cpu_rankings, gpu_rankings).run()
 
 
 

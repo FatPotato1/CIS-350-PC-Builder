@@ -19,8 +19,11 @@ hardware = {
     ],
 
     "Intel CPUs": [
-        "Core Ultra 7 285K",
-        "Core Ultra 5 245K"
+        "Core i9-14900K",
+        "Core i7-14700K",
+        "Core i5-14600K",
+        "Core i5-14400",
+        "Core i3-14100",
     ],
 
     "AMD CPUs": [

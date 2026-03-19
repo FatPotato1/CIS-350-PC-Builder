@@ -3,9 +3,9 @@ from data_loading import load_games, load_gpu_rankings
 
 #generate a list of parts for pc based on selected game and either min or recommended specs
 #this should be able to be modified somewhat easily to include amd gpus, all cpus, etc
-def generate_pc(game_name, target_performance, game_list, rankings,cpu_brand,gpu_brand):
+def generate_pc(game_name, target_performance, game_list, cpu_rankings, gpu_rankings, cpu_brand,gpu_brand):
 
-    return generate_gpu(game_name, target_performance, game_list, rankings, gpu_brand)
+    return generate_gpu(game_name, target_performance, game_list, gpu_rankings, gpu_brand), generate_cpu(game_name, target_performance, game_list, cpu_rankings, cpu_brand)
 
 
 def generate_cpu():
@@ -66,3 +66,5 @@ def generate_gpu(game_name, target_performance, game_list, rankings, gpu_brand):
 
 #print(generate_pc("Fortnite","min",load_games(),load_gpu_rankings()))
 #print(generate_pc("Escape from Tarkov","rec",load_games(),load_gpu_rankings()))
+#print(generate_ram("Fortnite","rec",load_games()))
+print(generate_cpu("Escape from Tarkov", "rec", load_games(), load_cpu_rankings(), "Intel"))
