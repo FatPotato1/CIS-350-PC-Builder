@@ -1,5 +1,5 @@
-#GUI built using Tkinter
-#Will contain all UI logic and code
+# GUI built using Tkinter
+# Will contain all UI logic and code
 # UI library used: Tkinter
 
 import ttkbootstrap as ttk
@@ -8,9 +8,11 @@ import tkinter as tk
 from components import hardware
 import auto_generate
 
+
 class UI:
 
-    def __init__(self,games,cpu_rankings, gpu_rankings):
+
+    def __init__(self, games, cpu_rankings, gpu_rankings):
         self.games = games
         self.cpu_rankings = cpu_rankings
         self.gpu_rankings = gpu_rankings
@@ -18,7 +20,7 @@ class UI:
         self.root.title("PC Builder")
         self.root.geometry("800x500")
         self._create_layout()
-        #main part data that is stored
+        # main part data that is stored
         self.build = {
             "CPU": None,
             "CPU_Brand": "Intel",
@@ -32,19 +34,18 @@ class UI:
         }
         self.update_build_display()
 
-
     def _create_layout(self):
         self.part_var = tk.StringVar()
         self.part_var.trace_add("write", self.add_component)
 
-        #main field
+        # main field
         main_frame = ttk.Frame(self.root, padding=10)
         main_frame.pack(fill=tk.BOTH, expand=True)
 
         bottom_frame = ttk.LabelFrame(self.root, text="Games")
         bottom_frame.pack(fill=tk.X, padx=10, pady=5)
 
-        #bottom area
+        # bottom area
         ttk.Label(bottom_frame, text="Select Game").grid(row=0, column=0, padx=5)
 
         self.game_var = tk.StringVar()
@@ -56,7 +57,7 @@ class UI:
             state="readonly",
             width=40
         )
-        #game selection area
+        # game selection area
         self.requirement_level = tk.StringVar(value="min")
 
         ttk.Radiobutton(
@@ -78,13 +79,13 @@ class UI:
         self.result_label.grid(row=1, column=0, columnspan=4, pady=5)
 
 
-        #left panel for component selection
+        # left panel for component selection
         left_frame = ttk.LabelFrame(main_frame, text="Components")
         left_frame.pack(side=tk.LEFT, fill=tk.Y)
 
         ttk.Label(left_frame, text="Select Component Type").pack(anchor="w")
 
-        #dropdown for components
+        # dropdown for components
         self.component_type = tk.StringVar()
         self.component_type.trace_add("write", self.update_part_dropdown)
 
@@ -96,7 +97,7 @@ class UI:
         )
         self.component_menu.pack(fill=tk.X, pady=5)
 
-        #pick brands for parts
+        # pick brands for parts
         ttk.Label(left_frame, text="Select Brand").pack(anchor="w")
 
         self.brand_var = tk.StringVar()
@@ -108,7 +109,7 @@ class UI:
         self.brand_menu.pack(fill=tk.X, pady=5)
         self.brand_var.trace_add("write", self.update_part_dropdown)
 
-        #part selection dropdown
+        # part selection dropdown
         ttk.Label(left_frame, text="Select Part").pack(anchor="w")
 
         self.part_menu = ttk.Combobox(
@@ -118,25 +119,26 @@ class UI:
         )
         self.part_menu.pack(fill=tk.X, pady=5)
 
-        #build summary
+        # build summary
         right_frame = ttk.LabelFrame(main_frame, text="Current Build")
         right_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
 
         self.build_list = tk.Text(right_frame, height=15, state="disabled")
         self.build_list.pack(fill=tk.BOTH, expand=True)
 
-        #generate build button
+        # generate build button
         ttk.Button(
             right_frame,
             text="Auto-generate Build",
             command=self.generate_build
         ).pack(pady=5)
 
+
     def update_part_dropdown(self, *_):
         component = self.component_type.get()
         brand = self.brand_var.get()
 
-        #automatically update brand menu
+        # automatically update brand menu
         if component == "CPU":
             self.brand_menu["values"] = ["Intel", "AMD"]
             if brand not in ["Intel", "AMD"]:
@@ -152,7 +154,7 @@ class UI:
         if component in ("CPU", "GPU") and brand:
             self.build[f"{component}_Brand"] = brand
             self.update_build_display()
-        #fill in part menu based on brand selection
+        # fill in part menu based on brand selection
         parts = []
         if component == "CPU":
             if brand == "Intel":
@@ -179,6 +181,7 @@ class UI:
         if self.part_var.get() not in parts:
             self.part_var.set("")
 
+
     def update_build_display(self):
 
         self.build_list.config(state="normal")
@@ -195,6 +198,7 @@ class UI:
         self.build_list.config(state="disabled")
 
 
+
     def add_component(self, *_):
         component = self.component_type.get()
         part = self.part_var.get()
@@ -206,11 +210,13 @@ class UI:
                 self.build[f"{component}_Brand"] = brand
             self.update_build_display()
 
-    #using this temporarily to generate build
+
+    # using this temporarily to generate build
     def generate_build(self):
         self.build["GPU"], self.build["CPU"] = auto_generate.generate_pc(self.game_var.get(), self.requirement_level.get(),
         self.games, self.cpu_rankings, self.gpu_rankings, self.build.get("CPU_Brand"),self.build.get("GPU_Brand"),)
         self.update_build_display()
+
 
     def run(self):
         self.root.mainloop()

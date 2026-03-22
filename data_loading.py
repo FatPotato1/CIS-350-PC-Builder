@@ -2,7 +2,9 @@ import components
 import csv
 import re
 
-#load all data from game settings csv
+# load all data from game settings csv
+
+
 def load_games():
     games = []
 
@@ -18,8 +20,10 @@ def load_games():
 
     return games
 
-#used chatgpt to generate python regexes because data is pretty inconsistent between different csvs
-#regex is used to make sure data is comparable and normalized
+# used chatgpt to generate python regexes because data is pretty inconsistent between different csvs
+# regex is used to make sure data is comparable and normalized
+
+
 def extract_gpu_model(name):
     name = name.lower().strip().replace("-", " ").replace("ti", " ti")
     match = re.search(r'(rtx|gtx|rx|hd|gt)\s?\d{3,4}\s?(ti)?', name)
@@ -28,7 +32,9 @@ def extract_gpu_model(name):
     return None
 
 
-#get ranking of each gpu
+# get ranking of each gpu
+
+
 def load_gpu_rankings():
     rankings = {}
 
@@ -71,7 +77,3 @@ def load_cpu_rankings():
                 score = int(row["Rank"])
                 rankings[identifier] = score
     return rankings
-
-#print(load_gpu_rankings())
-#print(load_games())
-#print(load_cpu_rankings())

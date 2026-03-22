@@ -1,4 +1,4 @@
-#Hardware that the user will be able to choose from
+# Hardware that the user will be able to choose from
 
 hardware = {
     "NVIDIA GPUs": [
