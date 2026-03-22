@@ -198,7 +198,6 @@ class UI:
         self.build_list.config(state="disabled")
 
 
-
     def add_component(self, *_):
         component = self.component_type.get()
         part = self.part_var.get()
@@ -220,3 +219,4 @@ class UI:
 
     def run(self):
         self.root.mainloop()
+

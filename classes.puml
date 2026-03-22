@@ -1,0 +1,26 @@
+@startuml classes
+set namespaceSeparator none
+class "UI" as ui.UI {
+  brand_menu : Combobox
+  brand_var : StringVar
+  build : dict
+  build_list : Text
+  component_menu : Combobox
+  component_type : StringVar
+  cpu_rankings
+  game_menu : Combobox
+  game_var : StringVar
+  games
+  gpu_rankings
+  part_menu : Combobox
+  part_var : StringVar
+  requirement_level : StringVar
+  result_label : Label
+  root : Window
+  add_component()
+  generate_build()
+  run()
+  update_build_display()
+  update_part_dropdown()
+}
+@enduml

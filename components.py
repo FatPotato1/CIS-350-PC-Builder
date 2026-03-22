@@ -30,5 +30,12 @@ hardware = {
         "Ryzen 9 9950X",
         "Ryzen 7 9700X",
         "Ryzen 5 9600X"
+    ],
+
+    "RAM": [
+        "CORSAIR VENGEANCE RGB 8GB DDR5",
+        "CORSAIR VENGEANCE RGB 16GB DDR5",
+        "CORSAIR VENGEANCE RGB 32GB DDR5",
+        "CORSAIR VENGEANCE RGB 64GB DDR5"
     ]
 }

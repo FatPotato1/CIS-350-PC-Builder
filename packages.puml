@@ -1,0 +1,20 @@
+@startuml packages
+set namespaceSeparator none
+package "auto_generate" as auto_generate {
+}
+package "components" as components {
+}
+package "data_loading" as data_loading {
+}
+package "main" as main {
+}
+package "ui" as ui {
+}
+auto_generate --> components
+auto_generate --> data_loading
+data_loading --> components
+main --> data_loading
+main --> ui
+ui --> auto_generate
+ui --> components
+@enduml
