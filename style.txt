@@ -1,0 +1,44 @@
+auto_generate.py580 E501 line too long (92  79 characters)
+auto_generate.py680 E501 line too long (87  79 characters)
+auto_generate.py980 E501 line too long (108  79 characters)
+auto_generate.py1180 E501 line too long (92  79 characters)
+auto_generate.py1280 E501 line too long (92  79 characters)
+auto_generate.py1580 E501 line too long (80  79 characters)
+auto_generate.py8280 E501 line too long (94  79 characters)
+auto_generate.py8380 E501 line too long (80  79 characters)
+auto_generate.py1105 E265 block comment should start with '# '
+auto_generate.py11080 E501 line too long (101  79 characters)
+data_loading.py1480 E501 line too long (104  79 characters)
+data_loading.py2380 E501 line too long (100  79 characters)
+data_loading.py4513 E265 block comment should start with '# '
+data_loading.py5980 E501 line too long (96  79 characters)
+data_loading.py671 E302 expected 2 blank lines, found 1
+main.py380 E501 line too long (95  79 characters)
+main.py980 E501 line too long (85  79 characters)
+main.py1180 E501 line too long (132  79 characters)
+main.py171 E302 expected 2 blank lines, found 1
+main.py251 E303 too many blank lines (3)
+ui.py155 E303 too many blank lines (2)
+ui.py4980 E501 line too long (81  79 characters)
+ui.py7880 E501 line too long (95  79 characters)
+ui.py829 E303 too many blank lines (2)
+ui.py9580 E501 line too long (82  79 characters)
+ui.py1375 E303 too many blank lines (2)
+ui.py1855 E303 too many blank lines (2)
+ui.py2015 E303 too many blank lines (2)
+ui.py2135 E303 too many blank lines (2)
+ui.py2145 E301 expected 1 blank line, found 0
+ui.py21580 E501 line too long (123  79 characters)
+ui.py2169 E128 continuation line under-indented for visual indent
+ui.py21680 E501 line too long (115  79 characters)
+ui.py21686 E231 missing whitespace after ','
+ui.py2205 E303 too many blank lines (2)
+ui.py2221 W391 blank line at end of file
+1       E128 continuation line under-indented for visual indent
+1       E231 missing whitespace after ','
+2       E265 block comment should start with '# '
+1       E301 expected 1 blank line, found 0
+2       E302 expected 2 blank lines, found 1
+8       E303 too many blank lines (3)
+20      E501 line too long (92  79 characters)
+1       W391 blank line at end of file

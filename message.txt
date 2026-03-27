@@ -1,0 +1,90 @@
+(.venv) C:\Users\ljurm\PycharmProjects\CIS-350-PC-Builder>pycodestyle --statistics auto_generate.py components.py data_loading.py main.py ui.py
+auto_generate.py:5:80: E501 line too long (92 > 79 characters)
+auto_generate.py:6:80: E501 line too long (87 > 79 characters)
+auto_generate.py:7:1: E302 expected 2 blank lines, found 1
+auto_generate.py:7:80: E501 line too long (107 > 79 characters)
+auto_generate.py:7:96: E231 missing whitespace after ','
+auto_generate.py:9:80: E501 line too long (171 > 79 characters)
+auto_generate.py:12:80: E501 line too long (80 > 79 characters)
+auto_generate.py:60:1: E302 expected 2 blank lines, found 1
+auto_generate.py:82:1: E303 too many blank lines (5)
+auto_generate.py:82:80: E501 line too long (94 > 79 characters)
+auto_generate.py:83:1: E302 expected 2 blank lines, found 5
+auto_generate.py:83:80: E501 line too long (80 > 79 characters)
+auto_generate.py:87:5: E265 block comment should start with '# '
+auto_generate.py:96:5: E265 block comment should start with '# '
+auto_generate.py:107:5: E265 block comment should start with '# '
+auto_generate.py:110:5: E265 block comment should start with '# '
+auto_generate.py:110:80: E501 line too long (101 > 79 characters)
+auto_generate.py:111:5: E265 block comment should start with '# '
+auto_generate.py:116:5: E265 block comment should start with '# '
+auto_generate.py:127:24: W292 no newline at end of file
+components.py:1:1: E265 block comment should start with '# '
+components.py:41:2: W292 no newline at end of file
+data_loading.py:5:1: E265 block comment should start with '# '
+data_loading.py:6:1: E302 expected 2 blank lines, found 1
+data_loading.py:12:80: E501 line too long (104 > 79 characters)
+data_loading.py:21:1: E265 block comment should start with '# '
+data_loading.py:21:80: E501 line too long (99 > 79 characters)
+data_loading.py:22:1: E265 block comment should start with '# '
+data_loading.py:23:1: E302 expected 2 blank lines, found 1
+data_loading.py:31:1: E265 block comment should start with '# '
+data_loading.py:39:13: E265 block comment should start with '# '
+data_loading.py:53:80: E501 line too long (96 > 79 characters)
+data_loading.py:61:1: E302 expected 2 blank lines, found 1
+data_loading.py:75:1: E265 block comment should start with '# '
+data_loading.py:76:1: E265 block comment should start with '# '
+data_loading.py:77:1: E265 block comment should start with '# '
+data_loading.py:77:28: W292 no newline at end of file
+main.py:1:1: E265 block comment should start with '# '
+main.py:2:1: E265 block comment should start with '# '
+main.py:3:1: E265 block comment should start with '# '
+main.py:3:80: E501 line too long (94 > 79 characters)
+main.py:4:1: E265 block comment should start with '# '
+main.py:5:1: E265 block comment should start with '# '
+main.py:6:1: E265 block comment should start with '# '
+main.py:7:1: E265 block comment should start with '# '
+main.py:9:1: E265 block comment should start with '# '
+main.py:9:80: E501 line too long (84 > 79 characters)
+main.py:10:1: E265 block comment should start with '# '
+main.py:11:1: E265 block comment should start with '# '
+main.py:11:80: E501 line too long (131 > 79 characters)
+main.py:13:1: E265 block comment should start with '# '
+main.py:17:1: E302 expected 2 blank lines, found 1
+main.py:25:1: E303 too many blank lines (3)
+ui.py:1:1: E265 block comment should start with '# '
+ui.py:2:1: E265 block comment should start with '# '
+ui.py:11:1: E302 expected 2 blank lines, found 1
+ui.py:13:22: E231 missing whitespace after ','
+ui.py:13:28: E231 missing whitespace after ','
+ui.py:21:9: E265 block comment should start with '# '
+ui.py:36:5: E303 too many blank lines (2)
+ui.py:40:9: E265 block comment should start with '# '
+ui.py:47:9: E265 block comment should start with '# '
+ui.py:48:80: E501 line too long (81 > 79 characters)
+ui.py:59:9: E265 block comment should start with '# '
+ui.py:77:80: E501 line too long (95 > 79 characters)
+ui.py:81:9: E265 block comment should start with '# '
+ui.py:81:9: E303 too many blank lines (2)
+ui.py:87:9: E265 block comment should start with '# '
+ui.py:94:80: E501 line too long (82 > 79 characters)
+ui.py:99:9: E265 block comment should start with '# '
+ui.py:111:9: E265 block comment should start with '# '
+ui.py:121:9: E265 block comment should start with '# '
+ui.py:128:9: E265 block comment should start with '# '
+ui.py:139:9: E265 block comment should start with '# '
+ui.py:155:9: E265 block comment should start with '# '
+ui.py:208:5: E265 block comment should start with '# '
+ui.py:210:80: E501 line too long (123 > 79 characters)
+ui.py:211:9: E128 continuation line under-indented for visual indent
+ui.py:211:80: E501 line too long (115 > 79 characters)
+ui.py:211:86: E231 missing whitespace after ','
+ui.py:216:1: W391 blank line at end of file
+1       E128 continuation line under-indented for visual indent
+4       E231 missing whitespace after ','
+41      E265 block comment should start with '# '
+8       E302 expected 2 blank lines, found 1
+4       E303 too many blank lines (5)
+19      E501 line too long (92 > 79 characters)
+3       W292 no newline at end of file
+1       W391 blank line at end of file
