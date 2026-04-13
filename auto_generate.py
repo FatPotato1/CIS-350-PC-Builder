@@ -6,13 +6,49 @@ from data_loading import (load_games, load_gpu_rankings,
 # this should be able to be modified somewhat easily to include amd gpus, all cpus, etc
 
 
-def generate_pc(game_name, target_performance, game_list, cpu_rankings, gpu_rankings, cpu_brand, gpu_brand):
+def generate_pc(game_name, target_performance, game_list, cpu_rankings, gpu_rankings, cpu_brand, gpu_brand, algorithm):
+    """
+    Generate a recommended PC parts list GPU and CPU for a given game and performance target.
 
-    return (generate_gpu(game_name, target_performance, game_list, gpu_rankings, gpu_brand),
-            generate_cpu(game_name, target_performance, game_list, cpu_rankings, cpu_brand))
+    Args:
+        game_name (str): The name of the game to maximize PC performance for
+        target_performance (str): Performance tier to target; "rec" for recommended specs or "min" for minimum specs.
+        game_list (list[dict]): List of game dictionaries containing spec requirements.
+        cpu_rankings (dict): Mapping of CPU model names to benchmark scores.
+        gpu_rankings (dict): Mapping of GPU model names to benchmark scores.
+        cpu_brand (str): Preferred CPU brand; "Intel" or "AMD".
+        gpu_brand (str): Preferred GPU brand; "NVIDIA" or "AMD".
+        algorithm: Selection algorithm to use for part picking
+
+    Returns:
+        tuple: A tuple of (gpu, cpu) where each element is a part name string or None if no match was found.
+    """
+
+    return (generate_gpu(game_name, target_performance, game_list, gpu_rankings, gpu_brand, algorithm),
+            generate_cpu(game_name, target_performance, game_list, cpu_rankings, cpu_brand, algorithm),
+            generate_ram(game_name, target_performance, game_list, algorithm))
 
 
-def generate_cpu(game_name, target_performance, game_list, rankings, cpu_brand):
+def generate_cpu(game_name, target_performance, game_list, rankings, cpu_brand, algorithm):
+    """
+    Select the most capable CPU that is compatible at or below the required benchmark score for a game's spec tier.
+
+    Looks up the required CPU benchmark score for the given game and performance target, then it
+    selects the highest-scoring CPU from the components list that still meets but does not
+    exceed that score
+
+    Args:
+        game_name (str): The name of the game to build a PC for.
+        target_performance (str): Performance tier to target; rec for recommended specs or min for minimum specs.
+        game_list (list[dict]): List of game dictionaries containing spec requirements.
+        rankings (dict): Mapping of CPU model names to benchmark scores.
+        cpu_brand (str): Preferred CPU brand; "Intel" or "AMD".
+        algorithm: Selection algorithm to use for part picking (reserved for future use).
+
+    Returns:
+        str or None: The name of the selected CPU component, or None if the required CPU model
+        is not found in the rankings.
+    """
 
     selected_cpu = None
     selected_score = None
@@ -60,13 +96,21 @@ def generate_cpu(game_name, target_performance, game_list, rankings, cpu_brand):
     return selected_cpu
 
 
-def generate_ram(game_name, target_performance, game_list):
-    selected_gpu = None
-    selected_score = None
-    # list of gpus from components
+def generate_ram(game_name, target_performance, game_list, algorithm):
+    """
+    Select the appropriate RAM stick for a game's minimum or recommended spec tier.
 
-    game = None
+    RAM is returned directly from the game's spec entry rather than being selected by benchmark score comparison.
 
+    Args:
+        game_name (str): The name of the game to build a PC for.
+        target_performance (str): Performance tier to target; rec for recommended specs or min for minimum specs.
+        game_list (list[dict]): List of game dictionaries containing spec requirements.
+        algorithm: Selection algorithm to use for part picking (reserved for future use).
+
+    Returns:
+        str: The RAM stick identifier from the game's spec entry.
+    """
     # find the game in list
     for x in game_list:
         if x["game_name"] == game_name:
@@ -80,7 +124,26 @@ def generate_ram(game_name, target_performance, game_list):
 
 
 # needs to be modified to include amd gpus, currently data loader regex only does nvidia cards
-def generate_gpu(game_name, target_performance, game_list, rankings, gpu_brand):
+def generate_gpu(game_name, target_performance, game_list, rankings, gpu_brand, algorithm):
+    """
+    Select the most capable GPU at or below the required benchmark score for a game's spec tier.
+
+    Looks up the required GPU benchmark score for the given game and performance target, then
+    selects the highest-scoring GPU from the components list that still meets but does not
+    exceed that score
+
+    Args:
+        game_name (str): The name of the game to build a PC for.
+        target_performance (str): Performance tier to target; "rec" for recommended specs or "min" for minimum specs.
+        game_list (list[dict]): List of game dictionaries containing spec requirements.
+        rankings (dict): Mapping of GPU model names to benchmark scores.
+        gpu_brand (str): Preferred GPU brand; "NVIDIA" or "AMD".
+        algorithm: Selection algorithm to use for part picking (reserved for future use).
+
+    Returns:
+        str or None: The name of the selected GPU component, or None if the required GPU model
+        is not found in the rankings.
+    """
 
     selected_gpu = None
     selected_score = None

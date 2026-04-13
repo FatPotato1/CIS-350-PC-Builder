@@ -1,3 +1,10 @@
+"""
+The purpose of this module is to define the GUI for the PC Builder application using Tkinter and ttkbootstrap.
+
+Authors: Dorian Lawton, Justin Hanko, Landon Jurmo and Jaykin Hang
+Date: April 24, 2026
+Version: Python 3.12
+"""
 # GUI built using Tkinter
 # Will contain all UI logic and code
 # UI library used: Tkinter
@@ -10,15 +17,27 @@ import auto_generate
 
 
 class UI:
-
+    """
+    UI class that creates the interface for the application.
+    """
 
     def __init__(self, games, cpu_rankings, gpu_rankings):
+        """
+        Initializes the UI with game data and benchmark rankings.
+
+        Args:
+            games (list[dict]): List of games and the components required for those games
+            cpu_rankings (dict): Mapping of CPU model names to benchmark scores
+            gpu_rankings (dict): Mapping of GPU model names to benchmark scores.
+        Returns:
+            None
+        """
         self.games = games
         self.cpu_rankings = cpu_rankings
         self.gpu_rankings = gpu_rankings
         self.root = ttk.Window(themename="darkly")
         self.root.title("PC Builder")
-        self.root.geometry("800x500")
+        self.root.geometry("1920x1080")
         self._create_layout()
         # main part data that is stored
         self.build = {
@@ -35,6 +54,12 @@ class UI:
         self.update_build_display()
 
     def _create_layout(self):
+        """
+        Creates the layout of the GUI components
+
+        Returns:
+            None
+        """
         self.part_var = tk.StringVar()
         self.part_var.trace_add("write", self.add_component)
 
@@ -126,6 +151,23 @@ class UI:
         self.build_list = tk.Text(right_frame, height=15, state="disabled")
         self.build_list.pack(fill=tk.BOTH, expand=True)
 
+        # algorithm selection
+        ttk.Label(right_frame, text="Generation Algorithm").pack(anchor="w", padx=5)
+
+        self.algorithm_var = tk.StringVar(value="Balanced")
+
+        self.algorithm_menu = ttk.Combobox(
+            right_frame,
+            textvariable=self.algorithm_var,
+            values=[
+                "Minimum Cost",
+                "Most Expensive"
+            ],
+            state="readonly"
+        )
+        self.algorithm_menu.pack(fill=tk.X, padx=5, pady=5)
+
+
         # generate build button
         ttk.Button(
             right_frame,
@@ -133,8 +175,17 @@ class UI:
             command=self.generate_build
         ).pack(pady=5)
 
+    
 
     def update_part_dropdown(self, *_):
+        """
+        Updates the dropdown menus based on the user's selection.
+
+        Args:
+            *_: Placeholder for other arguments
+        Return:
+            None
+        """
         component = self.component_type.get()
         brand = self.brand_var.get()
 
@@ -183,7 +234,12 @@ class UI:
 
 
     def update_build_display(self):
+        """
+        Updates the displayed build in the UI.
 
+        Return:
+            None
+        """
         self.build_list.config(state="normal")
         self.build_list.delete("1.0", tk.END)
 
@@ -199,6 +255,14 @@ class UI:
 
 
     def add_component(self, *_):
+        """
+        Adds the selected component to the UI.
+
+        Args:
+            *_: Placeholder for other arguments
+        Return:
+            None
+        """
         component = self.component_type.get()
         part = self.part_var.get()
         brand = self.brand_var.get()
@@ -212,11 +276,33 @@ class UI:
 
     # using this temporarily to generate build
     def generate_build(self):
-        self.build["GPU"], self.build["CPU"] = auto_generate.generate_pc(self.game_var.get(), self.requirement_level.get(),
-        self.games, self.cpu_rankings, self.gpu_rankings, self.build.get("CPU_Brand"),self.build.get("GPU_Brand"),)
+        """
+        Generates a build based on the selected game and other required categories.
+
+        Return:
+             None
+        """
+        strategy = self.algorithm_var.get()
+
+        self.build["GPU"], self.build["CPU"], self.build["RAM"] = auto_generate.generate_pc(
+            self.game_var.get(),
+            self.requirement_level.get(),
+            self.games,
+            self.cpu_rankings,
+            self.gpu_rankings,
+            self.build.get("CPU_Brand"),
+            self.build.get("GPU_Brand"),
+            strategy
+        )
         self.update_build_display()
 
 
     def run(self):
+        """
+        Starts the GUI application.
+
+        Return:
+             None
+        """
         self.root.mainloop()
 
