@@ -218,7 +218,10 @@ class UI:
             elif brand == "AMD":
                 parts = hardware.get("AMD GPUs", [])
         elif component == "Motherboard":
-            parts = hardware.get("Motherboards", [])
+            if self.build.get("CPU_Brand"):
+                parts = hardware.get("Motherboards", {}).get(self.build["CPU_Brand"], [])
+            else:
+                parts = []
         elif component == "RAM":
             parts = hardware.get("RAM", [])
         elif component == "Storage":
@@ -305,4 +308,6 @@ class UI:
              None
         """
         self.root.mainloop()
+
+
 
