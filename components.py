@@ -47,6 +47,16 @@ hardware = {
         "CORSAIR VENGEANCE RGB 32GB DDR5",
         "CORSAIR VENGEANCE RGB 64GB DDR5"
     ],
+    
+    
+    "Intel Motherboards": [
+        "ASUS Prime Z790-A"
+    ], 
+
+    "AMD Motherboards": [
+        "MSI B650 Tomahawk"
+    ],
+    
     "Cases": [
         'Montech Mid-Tower Case - Black',
         'DIYPC Wood Black Case',
@@ -94,6 +104,15 @@ prices = {
         '32GB': 435,
         '64GB': 1114
     },
+
+    "Intel Motherboards": {
+        "ASUS Prime Z790-A": 300
+    },
+
+    "AMD Motherboards": {
+        "MSI B650 Tomahawk": 220
+    },
+    
     "Cases": {
         'Montech Mid-Tower Case - Black': 70,
         'DIYPC Wood Black Case': 75,
