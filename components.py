@@ -49,13 +49,14 @@ hardware = {
     ],
     
     
-    "Intel Motherboards": [
-        "ASUS Prime Z790-A"
-    ], 
-
-    "AMD Motherboards": [
-        "MSI B650 Tomahawk"
+    "Motherboards": {
+    "Intel": [
+        "ASUS Prime Z790-A",
     ],
+    "AMD": [
+        "MSI B650 Tomahawk",
+    ]},
+    
     
     "Cases": [
         'Montech Mid-Tower Case - Black',
@@ -105,13 +106,10 @@ prices = {
         '64GB': 1114
     },
 
-    "Intel Motherboards": {
-        "ASUS Prime Z790-A": 300
-    },
-
-    "AMD Motherboards": {
-        "MSI B650 Tomahawk": 220
-    },
+    "Motherboards": {
+    "ASUS Prime Z790-A": 260,
+    "MSI B650 Tomahawk": 220
+    }
     
     "Cases": {
         'Montech Mid-Tower Case - Black': 70,
