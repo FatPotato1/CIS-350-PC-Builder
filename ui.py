@@ -196,6 +196,37 @@ class UI:
             command=self.generate_build
         ).pack(pady=5)
 
+        # Save section
+        ttk.Label(right_frame, text="Save Build").pack(anchor="w", padx=5)
+
+        self.save_name_var = tk.StringVar()
+        self.save_entry = ttk.Entry(right_frame, textvariable=self.save_name_var)
+        self.save_entry.pack(fill=tk.X, padx=5, pady=2)
+
+        ttk.Button(
+            right_frame,
+            text="Save Current Build",
+            command=self.save_current_build
+        ).pack(pady=3)
+
+        ttk.Button(
+            right_frame,
+            text="Load Build",
+            command=self.load_selected_build
+        ).pack(pady=3)
+
+        # dropdown of saved builds
+        self.saved_builds_var = tk.StringVar()
+        self.saved_builds_menu = ttk.Combobox(
+            right_frame,
+            textvariable=self.saved_builds_var,
+            state="readonly"
+        )
+        self.saved_builds_menu.pack(fill=tk.X, padx=5, pady=2)
+
+        self.refresh_saved_builds()
+
+
         # status label for budget warnings and errors
         self.status_label = ttk.Label(right_frame, text="", wraplength=300)
         self.status_label.pack(anchor="w", padx=5)
