@@ -696,6 +696,9 @@ class UI:
         name = self.saved_builds_var.get()
         if not name:
             return
+        if name == "None":
+            messagebox.showerror("Error", f'Can\'t delete \"None\"')
+            return
         save_load.delete_build(name)
         self.refresh_saved_builds()
         self.status_label.config(text=f"Deleted '{name}'.")
