@@ -217,6 +217,12 @@ class UI:
             command=self.load_selected_build
         ).pack(pady=3)
 
+        ttk.Button(
+            right_frame,
+            text="Delete Build",
+            command=self.delete_selected_build
+        ).pack(pady=3)
+
         # dropdown of saved builds
         self.saved_builds_var = tk.StringVar()
         self.saved_builds_menu = ttk.Combobox(
