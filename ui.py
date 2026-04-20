@@ -137,6 +137,12 @@ class UI:
         )
         self.part_menu.pack(fill=tk.X, pady=5)
 
+        ttk.Button(
+            left_frame,
+            text="Clear Selected Component",
+            command=self.clear_selected_component
+        ).pack(fill=tk.X, pady=5)
+
         # build summary
         right_frame = ttk.LabelFrame(main_frame, text="Current Build")
         right_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
@@ -413,6 +419,43 @@ class UI:
                 self.build[f"{component}_Brand"] = brand
             self.update_build_display()
 
+    def clear_selected_component(self):
+        """
+        Completely clears the current component selection.
+
+        This clears:
+            - The selected component in the build
+            - The brand
+            - The component type
+
+        Returns:
+            None
+        """
+        component = self.component_type.get()
+
+        if not component:
+            self.status_label.config(text="No component selected to clear.")
+            return
+
+        # Clear from build
+        if component in self.build:
+            self.build[component] = None
+
+        if component in ["CPU", "GPU"]:
+            self.build[f"{component}_Brand"] = ""
+
+        # Reset ALL UI selections
+        self.component_type.set("")
+        self.brand_var.set("")
+        self.part_var.set("")
+
+        # Clear dropdown options visually
+        self.brand_menu["values"] = []
+        self.part_menu["values"] = []
+
+        self.update_build_display()
+        self.status_label.config(text=f"{component} selection cleared.")
+
 
     def _on_algorithm_change(self, *_):
         """
@@ -661,8 +704,7 @@ class UI:
         """
         Clear all selected components from the current build.
 
-        Resets all component values to None while preserving default brand
-        selections (CPU and GPU). Updates the UI display and status message.
+        Resets all component values to None. Updates the UI display and status message.
 
         Returns:
             None
