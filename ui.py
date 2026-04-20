@@ -493,6 +493,57 @@ class UI:
             self.status_label.config(text="Not a valid budget.")
             return None
 
+    def save_current_build(self):
+        name = self.save_name_var.get().strip()
+
+        if not name:
+            messagebox.showerror("Error", "Please enter a name for the build.")
+            return
+
+        # prevent saving empty builds
+        if not self.build.get("CPU") or not self.build.get("GPU"):
+            messagebox.showerror("Error", "Build is incomplete.")
+            return
+
+        save_load.save_build(name, self.build.copy())
+        self.refresh_saved_builds()
+        self.status_label.config(text=f"Build '{name}' saved.")
+
+    def load_selected_build(self):
+        name = self.saved_builds_var.get()
+
+        if name == "None":
+            # clear the build
+            for key in self.build:
+                if key.endswith("_Brand"):
+                    continue
+                self.build[key] = None
+
+            self.update_build_display()
+            self.status_label.config(text="Cleared current build.")
+            return
+
+        if not name:
+            messagebox.showerror("Error", "Select a build to load.")
+            return
+
+        loaded = save_load.load_build(name)
+
+        if not loaded:
+            messagebox.showerror("Error", "Build not found.")
+            return
+
+        self.build.clear()
+        self.build.update(loaded)
+        self.update_build_display()
+        self.status_label.config(text=f"Loaded '{name}'.")
+
+    def refresh_saved_builds(self):
+        builds = save_load.load_all_builds()
+        values = ["None"] + list(builds.keys())
+        self.saved_builds_menu["values"] = values
+        self.saved_builds_var.set("None")
+
 
     def run(self):
         """
