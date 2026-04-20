@@ -547,6 +547,20 @@ class UI:
             return None
 
     def save_current_build(self):
+        """
+        Prompts the user to enter a name for the build. If the build doesn't have all info,
+        (missing a CPU or GPU), an error message is displayed and the save is cancelled.
+        If the user cancels or provides an empty name, the operation is also cancelled.
+
+        On successful save:
+            - The build is stored using the provided name.
+            - The saved builds list is refreshed.
+            - A status message is displayed to the user.
+
+        Returns:
+            None
+        """
+
         # prevent saving empty builds
         if not self.build.get("CPU") or not self.build.get("GPU"):
             messagebox.showerror("Error", "Build is incomplete.")
@@ -565,6 +579,16 @@ class UI:
         self.status_label.config(text=f"Build '{name}' saved.")
 
     def load_selected_build(self):
+        """
+        Load the currently selected build from saved builds.
+
+        If "None" is selected, the current build is cleared, including brand fields.
+        If no valid selection is made, an error message is shown.
+        And if the selected build exists, it replaces the current build with the loaded data.
+
+        Returns:
+            None
+        """
         name = self.saved_builds_var.get()
 
         if name == "None":
@@ -594,12 +618,35 @@ class UI:
         self.status_label.config(text=f"Loaded '{name}'.")
 
     def refresh_saved_builds(self):
+        """
+        Refresh the dropdown menu with all saved builds.
+
+        Brings all saved builds from storage and updates the dropdown menu
+        with their names. Adds a "None" option to allow the user to clear their selection.
+        "None is set as default.
+
+        Returns:
+            None
+        """
         builds = save_load.load_all_builds()
         values = ["None"] + list(builds.keys())
         self.saved_builds_menu["values"] = values
         self.saved_builds_var.set("None")
 
     def delete_selected_build(self):
+        """
+        Delete the currently selected build from storage.
+
+        If a valid build name is selected:
+            - Removes the build from storage.
+            - Refreshes the saved builds dropdown menu.
+            - Updates the status message.
+
+        If no valid name is selected, the delete action is silently ignored.
+
+        Returns:
+            None
+        """
         name = self.saved_builds_var.get()
         if not name:
             return
