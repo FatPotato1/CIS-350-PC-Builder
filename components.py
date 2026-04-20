@@ -6,7 +6,6 @@ Date: April 24, 2026
 Version: Python 3.12
 """
 
-
 # Hardware that the user will be able to choose from
 hardware = {
 
@@ -47,25 +46,30 @@ hardware = {
         "CORSAIR VENGEANCE RGB 32GB DDR5",
         "CORSAIR VENGEANCE RGB 64GB DDR5"
     ],
-    
-    
+
     "Motherboards": {
-    "Intel": [
-        "ASUS Prime Z790-A",
-    ],
-    "AMD": [
-        "MSI B650 Tomahawk",
-    ]},
-    
-    
+        "Intel": [
+            "ASUS Prime Z790-A",
+        ],
+        "AMD": [
+            "MSI B650 Tomahawk",
+        ]},
+
     "Cases": [
         'Montech Mid-Tower Case - Black',
         'DIYPC Wood Black Case',
         'Corsair Mid-Tower Case - White',
         'Fractal Design Meshify Case',
+    ],
+
+    "Storage": [
+        'Samsung 870 EVO 1TB SSD',
+    ],
+
+    "PSU": [
+        'Corsair RM1000x 1000W 80+ Gold',
     ]
 }
-
 
 prices = {
     "NVIDIA GPUs": {
@@ -107,15 +111,23 @@ prices = {
     },
 
     "Motherboards": {
-    "ASUS Prime Z790-A": 260,
-    "MSI B650 Tomahawk": 220
-    }
-    
+        "ASUS Prime Z790-A": 260,
+        "MSI B650 Tomahawk": 220
+    },
+
     "Cases": {
         'Montech Mid-Tower Case - Black': 70,
         'DIYPC Wood Black Case': 75,
         'Corsair Mid-Tower Case - White': 80,
         'Fractal Design Meshify Case': 154
+    },
+
+    "Storage": {
+        'Samsung 870 EVO 1TB SSD': 80,
+    },
+
+    "PSU": {
+        'Corsair RM1000x 1000W 80+ Gold': 170,
     }
 
 }
