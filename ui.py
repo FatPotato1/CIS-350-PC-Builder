@@ -577,6 +577,13 @@ class UI:
         self.saved_builds_menu["values"] = values
         self.saved_builds_var.set("None")
 
+    def delete_selected_build(self):
+        name = self.saved_builds_var.get()
+        if not name:
+            return
+        save_load.delete_build(name)
+        self.refresh_saved_builds()
+        self.status_label.config(text=f"Deleted '{name}'.")
 
     def run(self):
         """
