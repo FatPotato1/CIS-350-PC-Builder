@@ -15,7 +15,7 @@ import tkinter as tk
 from components import hardware
 import auto_generate
 import save_load
-from tkinter import messagebox
+from tkinter import messagebox, simpledialog
 
 
 class UI:
@@ -141,7 +141,22 @@ class UI:
         right_frame = ttk.LabelFrame(main_frame, text="Current Build")
         right_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
 
-        self.build_list = tk.Text(right_frame, height=15, state="disabled")
+        # split right_frame into left and right sections
+        content_frame = ttk.Frame(right_frame)
+        content_frame.pack(fill=tk.BOTH, expand=True)
+
+        left_panel = ttk.Frame(content_frame)
+        left_panel.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+        # vertical divider
+        ttk.Separator(content_frame, orient="vertical").pack(side=tk.LEFT, fill=tk.Y, padx=5)
+
+        right_panel = ttk.Frame(content_frame)
+        right_panel.pack(side=tk.LEFT, fill=tk.Y)
+        right_panel.pack_propagate(False)
+        right_panel.config(width=300)
+
+        self.build_list = tk.Text(left_panel, height=15, state="disabled")
         self.build_list.pack(fill=tk.BOTH, expand=True)
 
         # algorithm selection
@@ -198,42 +213,41 @@ class UI:
             command=self.generate_build
         ).pack(pady=5)
 
-        # Save section
-        ttk.Label(right_frame, text="Save Build").pack(anchor="w", padx=5)
+        # Save panel (RIGHT SIDE)
+        save_frame = ttk.LabelFrame(right_panel, text="Saved Builds")
+        save_frame.pack(fill=tk.Y, padx=5, pady=5)
 
         self.save_name_var = tk.StringVar()
-        self.save_entry = ttk.Entry(right_frame, textvariable=self.save_name_var)
+        self.save_entry = ttk.Entry(save_frame, textvariable=self.save_name_var)
         self.save_entry.pack(fill=tk.X, padx=5, pady=2)
 
         ttk.Button(
-            right_frame,
-            text="Save Current Build",
+            save_frame,
+            text="Save",
             command=self.save_current_build
-        ).pack(pady=3)
+        ).pack(fill=tk.X, padx=5, pady=2)
 
         ttk.Button(
-            right_frame,
-            text="Load Build",
+            save_frame,
+            text="Load",
             command=self.load_selected_build
-        ).pack(pady=3)
+        ).pack(fill=tk.X, padx=5, pady=2)
 
         ttk.Button(
-            right_frame,
-            text="Delete Build",
+            save_frame,
+            text="Delete",
             command=self.delete_selected_build
-        ).pack(pady=3)
+        ).pack(fill=tk.X, padx=5, pady=2)
 
-        # dropdown of saved builds
         self.saved_builds_var = tk.StringVar()
         self.saved_builds_menu = ttk.Combobox(
-            right_frame,
+            save_frame,
             textvariable=self.saved_builds_var,
             state="readonly"
         )
-        self.saved_builds_menu.pack(fill=tk.X, padx=5, pady=2)
+        self.saved_builds_menu.pack(fill=tk.X, padx=5, pady=5)
 
         self.refresh_saved_builds()
-
 
         # status label for budget warnings and errors
         self.status_label = ttk.Label(right_frame, text="", wraplength=300)
@@ -533,16 +547,18 @@ class UI:
             return None
 
     def save_current_build(self):
-        name = self.save_name_var.get().strip()
-
-        if not name:
-            messagebox.showerror("Error", "Please enter a name for the build.")
-            return
-
         # prevent saving empty builds
         if not self.build.get("CPU") or not self.build.get("GPU"):
             messagebox.showerror("Error", "Build is incomplete.")
             return
+
+        # prompt user for name
+        name = simpledialog.askstring("Save Build", "Enter a name for this build:")
+
+        if not name or not name.strip():
+            return  # user cancelled or entered nothing
+
+        name = name.strip()
 
         save_load.save_build(name, self.build.copy())
         self.refresh_saved_builds()
