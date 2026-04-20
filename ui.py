@@ -217,9 +217,9 @@ class UI:
         save_frame = ttk.LabelFrame(right_panel, text="Saved Builds")
         save_frame.pack(fill=tk.Y, padx=5, pady=5)
 
-        self.save_name_var = tk.StringVar()
-        self.save_entry = ttk.Entry(save_frame, textvariable=self.save_name_var)
-        self.save_entry.pack(fill=tk.X, padx=5, pady=2)
+        # self.save_name_var = tk.StringVar()
+        # self.save_entry = ttk.Entry(save_frame, textvariable=self.save_name_var)
+        # self.save_entry.pack(fill=tk.X, padx=5, pady=2)
 
         ttk.Button(
             save_frame,
@@ -237,6 +237,12 @@ class UI:
             save_frame,
             text="Delete",
             command=self.delete_selected_build
+        ).pack(fill=tk.X, padx=5, pady=2)
+
+        ttk.Button(
+            save_frame,
+            text="Clear Build",
+            command=self.clear_build
         ).pack(fill=tk.X, padx=5, pady=2)
 
         self.saved_builds_var = tk.StringVar()
@@ -592,11 +598,8 @@ class UI:
         name = self.saved_builds_var.get()
 
         if name == "None":
-            # clear the build
-            for key in self.build:
-                if key.endswith("_Brand"):
-                    continue
-                self.build[key] = None
+            self.clear_build()
+            return
 
             self.update_build_display()
             self.status_label.config(text="Cleared current build.")
@@ -653,6 +656,24 @@ class UI:
         save_load.delete_build(name)
         self.refresh_saved_builds()
         self.status_label.config(text=f"Deleted '{name}'.")
+
+    def clear_build(self):
+        """
+        Clear all selected components from the current build.
+
+        Resets all component values to None while preserving default brand
+        selections (CPU and GPU). Updates the UI display and status message.
+
+        Returns:
+            None
+        """
+        for key in self.build:
+            if key.endswith("_Brand"):
+                continue
+            self.build[key] = None
+
+        self.update_build_display()
+        self.status_label.config(text="Build cleared.")
 
     def run(self):
         """
