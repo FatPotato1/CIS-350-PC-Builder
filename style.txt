@@ -1,44 +1,135 @@
-auto_generate.py580 E501 line too long (92  79 characters)
-auto_generate.py680 E501 line too long (87  79 characters)
-auto_generate.py980 E501 line too long (108  79 characters)
-auto_generate.py1180 E501 line too long (92  79 characters)
-auto_generate.py1280 E501 line too long (92  79 characters)
-auto_generate.py1580 E501 line too long (80  79 characters)
-auto_generate.py8280 E501 line too long (94  79 characters)
-auto_generate.py8380 E501 line too long (80  79 characters)
-auto_generate.py1105 E265 block comment should start with '# '
-auto_generate.py11080 E501 line too long (101  79 characters)
-data_loading.py1480 E501 line too long (104  79 characters)
-data_loading.py2380 E501 line too long (100  79 characters)
-data_loading.py4513 E265 block comment should start with '# '
-data_loading.py5980 E501 line too long (96  79 characters)
-data_loading.py671 E302 expected 2 blank lines, found 1
-main.py380 E501 line too long (95  79 characters)
-main.py980 E501 line too long (85  79 characters)
-main.py1180 E501 line too long (132  79 characters)
-main.py171 E302 expected 2 blank lines, found 1
-main.py251 E303 too many blank lines (3)
-ui.py155 E303 too many blank lines (2)
-ui.py4980 E501 line too long (81  79 characters)
-ui.py7880 E501 line too long (95  79 characters)
-ui.py829 E303 too many blank lines (2)
-ui.py9580 E501 line too long (82  79 characters)
-ui.py1375 E303 too many blank lines (2)
-ui.py1855 E303 too many blank lines (2)
-ui.py2015 E303 too many blank lines (2)
-ui.py2135 E303 too many blank lines (2)
-ui.py2145 E301 expected 1 blank line, found 0
-ui.py21580 E501 line too long (123  79 characters)
-ui.py2169 E128 continuation line under-indented for visual indent
-ui.py21680 E501 line too long (115  79 characters)
-ui.py21686 E231 missing whitespace after ','
-ui.py2205 E303 too many blank lines (2)
-ui.py2221 W391 blank line at end of file
-1       E128 continuation line under-indented for visual indent
+auto_generate.py:5:80: E501 line too long (92 > 79 characters)
+auto_generate.py:6:80: E501 line too long (87 > 79 characters)
+auto_generate.py:9:80: E501 line too long (119 > 79 characters)
+auto_generate.py:11:80: E501 line too long (93 > 79 characters)
+auto_generate.py:15:80: E501 line too long (117 > 79 characters)
+auto_generate.py:16:80: E501 line too long (87 > 79 characters)
+auto_generate.py:24:80: E501 line too long (108 > 79 characters)
+auto_generate.py:27:80: E501 line too long (103 > 79 characters)
+auto_generate.py:28:80: E501 line too long (103 > 79 characters)
+auto_generate.py:32:80: E501 line too long (91 > 79 characters)
+auto_generate.py:34:80: E501 line too long (115 > 79 characters)
+auto_generate.py:36:80: E501 line too long (96 > 79 characters)
+auto_generate.py:37:80: E501 line too long (90 > 79 characters)
+auto_generate.py:42:80: E501 line too long (113 > 79 characters)
+auto_generate.py:43:80: E501 line too long (87 > 79 characters)
+auto_generate.py:46:80: E501 line too long (89 > 79 characters)
+auto_generate.py:49:80: E501 line too long (94 > 79 characters)
+auto_generate.py:101:80: E501 line too long (83 > 79 characters)
+auto_generate.py:103:80: E501 line too long (113 > 79 characters)
+auto_generate.py:107:80: E501 line too long (113 > 79 characters)
+auto_generate.py:108:80: E501 line too long (87 > 79 characters)
+auto_generate.py:109:80: E501 line too long (89 > 79 characters)
+auto_generate.py:126:80: E501 line too long (94 > 79 characters)
+auto_generate.py:127:80: E501 line too long (91 > 79 characters)
+auto_generate.py:129:80: E501 line too long (96 > 79 characters)
+auto_generate.py:131:80: E501 line too long (93 > 79 characters)
+auto_generate.py:132:80: E501 line too long (90 > 79 characters)
+auto_generate.py:137:80: E501 line too long (117 > 79 characters)
+auto_generate.py:138:80: E501 line too long (87 > 79 characters)
+auto_generate.py:141:80: E501 line too long (89 > 79 characters)
+auto_generate.py:144:80: E501 line too long (94 > 79 characters)
+auto_generate.py:173:5: E265 block comment should start with '# '
+auto_generate.py:173:80: E501 line too long (101 > 79 characters)
+auto_generate.py:198:80: E501 line too long (80 > 79 characters)
+auto_generate.py:212:80: E501 line too long (106 > 79 characters)
+auto_generate.py:215:80: E501 line too long (95 > 79 characters)
+auto_generate.py:216:80: E501 line too long (89 > 79 characters)
+auto_generate.py:217:80: E501 line too long (83 > 79 characters)
+auto_generate.py:218:80: E501 line too long (83 > 79 characters)
+auto_generate.py:245:80: E501 line too long (91 > 79 characters)
+auto_generate.py:248:80: E501 line too long (80 > 79 characters)
+auto_generate.py:287:80: E501 line too long (82 > 79 characters)
+auto_generate.py:327:15: E272 multiple spaces before keyword
+auto_generate.py:328:80: E501 line too long (90 > 79 characters)
+auto_generate.py:330:15: E272 multiple spaces before keyword
+auto_generate.py:331:80: E501 line too long (88 > 79 characters)
+auto_generate.py:334:16: E272 multiple spaces before keyword
+auto_generate.py:335:19: E272 multiple spaces before keyword
+auto_generate.py:336:15: E272 multiple spaces before keyword
+auto_generate.py:372:80: E501 line too long (81 > 79 characters)
+auto_generate.py:402:80: E501 line too long (93 > 79 characters)
+auto_generate.py:413:13: W292 no newline at end of file
+components.py:2:80: E501 line too long (116 > 79 characters)
+components.py:133:2: W292 no newline at end of file
+data_loading.py:2:80: E501 line too long (120 > 79 characters)
+data_loading.py:18:80: E501 line too long (89 > 79 characters)
+data_loading.py:21:80: E501 line too long (115 > 79 characters)
+data_loading.py:28:80: E501 line too long (104 > 79 characters)
+data_loading.py:37:80: E501 line too long (100 > 79 characters)
+data_loading.py:73:13: E265 block comment should start with '# '
+data_loading.py:96:80: E501 line too long (96 > 79 characters)
+data_loading.py:104:1: E302 expected 2 blank lines, found 1
+main.py:17:1: E302 expected 2 blank lines, found 1
+main.py:25:1: E303 too many blank lines (3)
+save_load.py:5:80: E501 line too long (81 > 79 characters)
+testing.py:10:80: E501 line too long (88 > 79 characters)
+testing.py:13:80: E501 line too long (98 > 79 characters)
+testing.py:13:99: W291 trailing whitespace
+testing.py:17:1: E302 expected 2 blank lines, found 1
+testing.py:17:45: E261 at least two spaces before inline comment
+testing.py:17:80: E501 line too long (82 > 79 characters)
+testing.py:47:1: E302 expected 2 blank lines, found 1
+testing.py:47:46: E261 at least two spaces before inline comment
+testing.py:47:80: E501 line too long (84 > 79 characters)
+testing.py:77:80: E501 line too long (92 > 79 characters)
+testing.py:107:33: E231 missing whitespace after ','
+testing.py:109:1: E302 expected 2 blank lines, found 1
+testing.py:109:46: E261 at least two spaces before inline comment
+testing.py:109:80: E501 line too long (84 > 79 characters)
+testing.py:142:1: E302 expected 2 blank lines, found 1
+testing.py:142:42: E261 at least two spaces before inline comment
+testing.py:177:1: E305 expected 2 blank lines after class or function definition, found 0
+ui.py:2:80: E501 line too long (110 > 79 characters)
+ui.py:31:80: E501 line too long (89 > 79 characters)
+ui.py:33:80: E501 line too long (80 > 79 characters)
+ui.py:65:80: E501 line too long (85 > 79 characters)
+ui.py:84:80: E501 line too long (81 > 79 characters)
+ui.py:97:80: E501 line too long (95 > 79 characters)
+ui.py:113:80: E501 line too long (82 > 79 characters)
+ui.py:158:80: E501 line too long (93 > 79 characters)
+ui.py:169:80: E501 line too long (84 > 79 characters)
+ui.py:204:80: E501 line too long (86 > 79 characters)
+ui.py:227:80: E501 line too long (82 > 79 characters)
+ui.py:269:80: E501 line too long (87 > 79 characters)
+ui.py:270:80: E501 line too long (113 > 79 characters)
+ui.py:274:5: E303 too many blank lines (2)
+ui.py:316:80: E501 line too long (89 > 79 characters)
+ui.py:333:5: E303 too many blank lines (2)
+ui.py:351:80: E501 line too long (103 > 79 characters)
+ui.py:382:80: E501 line too long (95 > 79 characters)
+ui.py:385:80: E501 line too long (93 > 79 characters)
+ui.py:403:5: E303 too many blank lines (2)
+ui.py:460:5: E303 too many blank lines (2)
+ui.py:462:80: E501 line too long (90 > 79 characters)
+ui.py:466:80: E501 line too long (82 > 79 characters)
+ui.py:467:80: E501 line too long (81 > 79 characters)
+ui.py:468:80: E501 line too long (83 > 79 characters)
+ui.py:495:80: E501 line too long (80 > 79 characters)
+ui.py:496:80: E501 line too long (82 > 79 characters)
+ui.py:508:80: E501 line too long (103 > 79 characters)
+ui.py:517:80: E501 line too long (99 > 79 characters)
+ui.py:524:80: E501 line too long (96 > 79 characters)
+ui.py:542:80: E501 line too long (80 > 79 characters)
+ui.py:569:80: E501 line too long (80 > 79 characters)
+ui.py:578:80: E501 line too long (89 > 79 characters)
+ui.py:590:80: E501 line too long (90 > 79 characters)
+ui.py:600:80: E501 line too long (91 > 79 characters)
+ui.py:601:80: E501 line too long (88 > 79 characters)
+ui.py:602:80: E501 line too long (87 > 79 characters)
+ui.py:619:80: E501 line too long (83 > 79 characters)
+ui.py:634:80: E501 line too long (84 > 79 characters)
+ui.py:636:80: E501 line too long (93 > 79 characters)
+ui.py:671:80: E501 line too long (90 > 79 characters)
+ui.py:710:80: E501 line too long (87 > 79 characters)
+ui.py:730:29: W292 no newline at end of file
 1       E231 missing whitespace after ','
+4       E261 at least two spaces before inline comment
 2       E265 block comment should start with '# '
-1       E301 expected 1 blank line, found 0
-2       E302 expected 2 blank lines, found 1
-8       E303 too many blank lines (3)
-20      E501 line too long (92  79 characters)
-1       W391 blank line at end of file
+5       E272 multiple spaces before keyword
+6       E302 expected 2 blank lines, found 1
+5       E303 too many blank lines (3)
+1       E305 expected 2 blank lines after class or function definition, found 0
+97      E501 line too long (92 > 79 characters)
+1       W291 trailing whitespace
+3       W292 no newline at end of file

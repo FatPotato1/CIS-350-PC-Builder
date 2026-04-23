@@ -1,12 +1,18 @@
 @startuml classes
 set namespaceSeparator none
 class "UI" as ui.UI {
+  algorithm_menu : Combobox
+  algorithm_var : StringVar
   brand_menu : Combobox
   brand_var : StringVar
+  budget_entry : Entry
+  budget_frame : LabelFrame
+  budget_var : StringVar
   build : dict
   build_list : Text
   component_menu : Combobox
   component_type : StringVar
+  cost_label : Label
   cpu_rankings
   game_menu : Combobox
   game_var : StringVar
@@ -17,10 +23,48 @@ class "UI" as ui.UI {
   requirement_level : StringVar
   result_label : Label
   root : Window
+  saved_builds_menu : Combobox
+  saved_builds_var : StringVar
+  status_label : Label
+  tier_frame : LabelFrame
   add_component()
+  clear_build()
+  clear_selected_component()
+  delete_selected_build()
   generate_build()
+  load_selected_build()
+  refresh_saved_builds()
   run()
+  save_current_build()
   update_build_display()
   update_part_dropdown()
+}
+class "auto_generate_tests" as testing.auto_generate_tests {
+  test_build_price_returns_int()
+  test_fixed_component_cost_non_negative()
+  test_generate_cpu_returns_value()
+  test_generate_gpu_returns_value()
+  test_generate_ram_min()
+}
+class "compatibility_tests" as testing.compatibility_tests {
+  test_amd_valid()
+  test_intel_valid()
+  test_missing_motherboard_passes()
+  test_wrong_motherboard_compatibility()
+}
+class "data_loading_tests" as testing.data_loading_tests {
+  test_cpu_rankings_returns_dict()
+  test_extract_cpu_model()
+  test_extract_gpu_model()
+  test_gpu_rankings_returns_dict()
+  test_load_games_returns_list()
+}
+class "save_load_tests" as testing.save_load_tests {
+  name : str
+  setUp()
+  test_delete_build_removes_entry()
+  test_load_all_builds_returns_dict()
+  test_load_missing_build_returns_none()
+  test_save_load_creates_file()
 }
 @enduml
