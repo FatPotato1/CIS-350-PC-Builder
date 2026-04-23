@@ -2,11 +2,17 @@
 set namespaceSeparator none
 package "auto_generate" as auto_generate {
 }
+package "compatibility" as compatibility {
+}
 package "components" as components {
 }
 package "data_loading" as data_loading {
 }
 package "main" as main {
+}
+package "save_load" as save_load {
+}
+package "testing" as testing {
 }
 package "ui" as ui {
 }
@@ -15,6 +21,12 @@ auto_generate --> data_loading
 data_loading --> components
 main --> data_loading
 main --> ui
+testing --> auto_generate
+testing --> compatibility
+testing --> components
+testing --> data_loading
+testing --> save_load
 ui --> auto_generate
 ui --> components
+ui --> save_load
 @enduml
