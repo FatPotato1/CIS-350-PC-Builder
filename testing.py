@@ -1,3 +1,11 @@
+"""
+The testing file will give tests using unittests for auto_generate.py, compatability.py,
+data_loading.py, and save_load.py
+
+Anything else that can be logically tested will be tested with a a manual test that will be marked
+with a test ID
+"""
+
 import unittest as unittest
 import auto_generate
 import data_loading
@@ -6,15 +14,8 @@ import save_load
 import compatibility
 import os
 import json
-"""
-The testing file will give tests using unittests for auto_generate.py, compatability.py,
-data_loading.py, and save_load.py
 
-Anything else that can be logically tested will be tested with a a manual test that will be marked 
-with a test ID
-"""
-
-class data_loading_tests(unittest.TestCase): # Testing of the data_loading.py file
+class Data_loading_tests(unittest.TestCase): # Testing of the data_loading.py file
 
     # Needs to return a list of games
     def test_load_games_returns_list(self):
@@ -44,7 +45,7 @@ class data_loading_tests(unittest.TestCase): # Testing of the data_loading.py fi
         result = data_loading.extract_cpu_model("Core i9-14900KS")
         self.assertTrue(result is None or isinstance(result, str))
 
-class auto_generate_tests(unittest.TestCase): # Testing of the auto_generate.py file
+class Auto_generate_tests(unittest.TestCase): # Testing of the auto_generate.py file
 
     # generate_cpu should return a cpu if there is one
     # If there is no cpu, return None
@@ -106,7 +107,7 @@ class auto_generate_tests(unittest.TestCase): # Testing of the auto_generate.py 
         self.assertIsInstance(result, int)
         self.assertEquals(result,3392)
 
-class compatibility_tests(unittest.TestCase): # Testing of the compatability.py file
+class Compatibility_tests(unittest.TestCase): # Testing of the compatability.py file
 
     # Test to make sure that Intel CPUs are compatible with the Z790-A
     # All Intel CPU are set to be paired with the ASUS Prime motherboard
@@ -139,7 +140,7 @@ class compatibility_tests(unittest.TestCase): # Testing of the compatability.py 
         build = {"CPU_Brand": "Intel"}
         self.assertTrue(compatibility.is_compatible(build))
 
-class save_load_tests(unittest.TestCase): # Testing for the save_load.py file
+class Save_load_tests(unittest.TestCase): # Testing for the save_load.py file
 
     # Reset state for testing
     def setUp(self):
