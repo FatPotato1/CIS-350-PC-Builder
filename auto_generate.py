@@ -170,8 +170,6 @@ def generate_gpu(game_name, target_performance, game_list, rankings, gpu_brand, 
     # the ranking from GPU_UserBenchmarks that the picked GPU must beat
     required_score = rankings.get(required_gpu_model)
 
-    #TODO: some gpus either are not in list or not formatted right, probably should be fixed sometime
-    # one of them is minecraft on min settings
     if required_score is None:
         print("GPU not in parts list")
         return None
