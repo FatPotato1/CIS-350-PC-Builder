@@ -6,7 +6,7 @@ Anything else that can be logically tested will be tested with a a manual test t
 with a test ID
 """
 
-import unittest as unittest
+import unittest
 import os
 import json
 import auto_generate
@@ -15,7 +15,7 @@ import components
 import save_load
 import compatibility
 
-class Data_loading_tests(unittest.TestCase):
+class DataLoadingTests(unittest.TestCase):
     """
     Unit tests for functions in the data_loading module.
     """
@@ -84,7 +84,7 @@ class Data_loading_tests(unittest.TestCase):
         result = data_loading.extract_cpu_model("Core i9-14900KS")
         self.assertTrue(result is None or isinstance(result, str))
 
-class Auto_generate_tests(unittest.TestCase):
+class AutoGenerateTests(unittest.TestCase):
     """
     Unit tests for functions in the auto_generate module.
     """
@@ -149,7 +149,7 @@ class Auto_generate_tests(unittest.TestCase):
         self.assertIsInstance(result, int)
         self.assertEqual(result,3392)
 
-class Compatibility_tests(unittest.TestCase): # Testing of the compatability.py file
+class CompatibilityTests(unittest.TestCase): # Testing of the compatability.py file
     """Unit tests for functions in the compatibility module."""
 
 
@@ -213,7 +213,7 @@ class Compatibility_tests(unittest.TestCase): # Testing of the compatability.py 
         build = {"CPU_Brand": "Intel"}
         self.assertTrue(compatibility.is_compatible(build))
 
-class Save_load_tests(unittest.TestCase): # Testing for the save_load.py file
+class SaveLoadTests(unittest.TestCase): # Testing for the save_load.py file
     """Unit tests for functions in the save_load module."""
 
 
@@ -290,6 +290,11 @@ class Save_load_tests(unittest.TestCase): # Testing for the save_load.py file
         self.assertIsInstance(result, dict)
 
     class TestIntegration(unittest.TestCase):
+        """
+        This module contains unit and integration tests for the PC Builder application.
+        It verifies the correctness of individual components as well as the interaction
+        between multiple modules in the system.
+        """
 
         def test_full_pc_generation_pipeline(self):
             """
