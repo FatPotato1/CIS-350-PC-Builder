@@ -10,12 +10,12 @@ Version: Python 3.12
 # UI library used: Tkinter
 
 import ttkbootstrap as ttk
-from ttkbootstrap.constants import *
 import tkinter as tk
+from tkinter import messagebox, simpledialog
+from ttkbootstrap.constants import *
 from components import hardware
 import auto_generate
 import save_load
-from tkinter import messagebox, simpledialog
 
 
 class UI:
@@ -697,7 +697,8 @@ class UI:
         if not name:
             return
         if name == "None":
-            messagebox.showerror("Error", f'Can\'t delete \"None\"')
+            messagebox.showerror("Error", f'Can\'t delete \"None\"2.99'
+                                          f'4.')
             return
         save_load.delete_build(name)
         self.refresh_saved_builds()
