@@ -7,13 +7,13 @@ with a test ID
 """
 
 import unittest as unittest
+import os
+import json
 import auto_generate
 import data_loading
 import components
 import save_load
 import compatibility
-import os
-import json
 
 class Data_loading_tests(unittest.TestCase):
     """
@@ -89,47 +89,9 @@ class Auto_generate_tests(unittest.TestCase):
     Unit tests for functions in the auto_generate module.
     """
 
-    def test_generate_cpu_returns_value(self):
-        """
-        Verify generate_cpu() returns a valid CPU or None.
-
-        Ensures:
-        - Output is either a string (CPU name) or None if unavailable
-        - Function handles valid inputs without crashing
-        """
-
-        result = auto_generate.generate_cpu(
-            "Fortnite",
-            "min",
-            auto_generate.components.hardware,
-            auto_generate.components.prices,
-            "Intel",
-            None
-        )
-        self.assertTrue(result is None or isinstance(result, str))
-
     # generate_gpu should return a gpu if there is one
     # If there is no gpu, return None
-    def test_generate_gpu_returns_value(self):
-        """
-        Verify generate_gpu() returns a valid GPU or None.
 
-        Ensures:
-        - Output is either a string (GPU name) or None if unavailable
-        - Function handles valid inputs without crashing
-        """
-
-        result = auto_generate.generate_gpu(
-            "Fortnite",
-            "min",
-            auto_generate.components.hardware,
-            auto_generate.components.prices,
-            "NVIDIA",
-            None
-        )
-        self.assertTrue(result is None or isinstance(result, str))
-
-    # generate_ram should return the minimum ram needed for a game
     def test_generate_ram_min(self):
         """
         Verify generate_ram() returns a RAM specification string.
@@ -185,7 +147,7 @@ class Auto_generate_tests(unittest.TestCase):
 
         result = auto_generate.get_build_price(build)
         self.assertIsInstance(result, int)
-        self.assertEquals(result,3392)
+        self.assertEqual(result,3392)
 
 class Compatibility_tests(unittest.TestCase): # Testing of the compatability.py file
     """Unit tests for functions in the compatibility module."""
@@ -327,6 +289,103 @@ class Save_load_tests(unittest.TestCase): # Testing for the save_load.py file
         result = save_load.load_all_builds()
         self.assertIsInstance(result, dict)
 
+    class TestIntegration(unittest.TestCase):
+
+        def test_full_pc_generation_pipeline(self):
+            """
+            Verify full PC generation pipeline works across modules.
+
+            Ensures:
+            - Game data loads correctly from CSV
+            - CPU and GPU rankings are retrieved successfully
+            - PC components (CPU, GPU, RAM) are generated
+            - System integrates data_loading and auto_generate modules properly
+            """
+
+            games = data_loading.load_games()
+            cpu_rankings = data_loading.load_cpu_rankings()
+            gpu_rankings = data_loading.load_gpu_rankings()
+
+            gpu, cpu, ram = auto_generate.generate_pc(
+                "Fortnite",
+                "rec",
+                games,
+                cpu_rankings,
+                gpu_rankings,
+                "Intel",
+                "NVIDIA",
+                None
+            )
+
+            self.assertIsNotNone(cpu)
+            self.assertIsNotNone(gpu)
+            self.assertIsNotNone(ram)
+
+        def test_build_price_integration(self):
+            """
+            Verify build pricing is calculated correctly.
+
+            Ensures:
+            - Build dictionary is processed across components module
+            - Prices are retrieved and summed correctly
+            - Returned value is a valid total cost greater than zero
+            """
+
+            build = {
+                "GPU": "RTX 5090",
+                "GPU_Brand": "NVIDIA",
+                "CPU": "Core i9-14900KS",
+                "CPU_Brand": "Intel",
+                "Motherboard": "ASUS Prime Z790-A",
+                "Case": "DIYPC Wood Black Case",
+                "Storage": "Samsung 870 EVO 1TB SSD",
+                "PSU": "Corsair RM1000x 1000W 80+ Gold",
+                "RAM": "CORSAIR VENGEANCE RGB 16GB DDR5"
+            }
+
+            price = auto_generate.get_build_price(build)
+
+            self.assertIsInstance(price, int)
+            self.assertGreater(price, 0)
+
+        def test_save_and_load_build_integration(self):
+            """
+            Verify saving and loading a build works correctly.
+
+            Ensures:
+            - Build is stored successfully using save_build
+            - Stored build can be retrieved using load_build
+            - Data remains consistent across operations
+            """
+
+            build = {
+                "CPU": "i5",
+                "GPU": "RTX 3060",
+                "RAM": "16GB"
+            }
+
+            save_load.save_build("integration_test_build", build)
+            loaded = save_load.load_build("integration_test_build")
+
+            self.assertEqual(loaded, build)
+
+        def test_delete_build_integration(self):
+            """
+            Verify deleting a build removes it from storage.
+
+            Ensures:
+            - Build is removed from saved data
+            - Deleted build cannot be retrieved
+            - System handles deletion without errors
+            """
+
+            build = {"CPU": "i5"}
+
+            save_load.save_build("delete_test", build)
+            save_load.delete_build("delete_test")
+
+            result = save_load.load_build("delete_test")
+            self.assertIsNone(result)
 
 if __name__ == '__main__':
     unittest.main()
