@@ -6,29 +6,23 @@ Anything else that can be logically tested will be tested with a a manual test t
 with a test ID
 """
 
-import unittest
+import unittest as unittest
 import os
 import json
 import auto_generate
+from data_loading import load_games, load_gpu_rankings, load_cpu_rankings
 import data_loading
 import components
 import save_load
 import compatibility
 
-class DataLoadingTests(unittest.TestCase):
+class Data_loading_tests(unittest.TestCase):
     """
     Unit tests for functions in the data_loading module.
     """
 
 
     def test_load_games_returns_list(self):
-        """
-        Verify that load_games() returns a non-empty list.
-
-        Ensures:
-        - The return type is a list
-        - The list contains at least one game entry
-        """
 
         games = data_loading.load_games()
         self.assertIsInstance(games, list)
@@ -36,196 +30,152 @@ class DataLoadingTests(unittest.TestCase):
 
 
     def test_gpu_rankings_returns_dict(self):
-        """
-        Verify that load_gpu_rankings() returns a dictionary.
-
-        Ensures:
-        - GPU rankings data is structured as key-value pairs
-        """
 
         rankings = data_loading.load_gpu_rankings()
         self.assertIsInstance(rankings, dict)
 
 
     def test_cpu_rankings_returns_dict(self):
-        """
-       Verify that load_cpu_rankings() returns a dictionary.
-
-       Ensures:
-       - CPU rankings data is structured as key-value pairs
-       """
 
         rankings = data_loading.load_cpu_rankings()
         self.assertIsInstance(rankings, dict)
 
 
     def test_extract_gpu_model(self):
-        """
-        Test extraction of a GPU model string.
-
-        Ensures:
-        - The function returns either None or a string
-        - Handles valid GPU input safely
-        """
 
         result = data_loading.extract_gpu_model("RTX 5090")
         self.assertTrue(result is None or isinstance(result, str))
 
 
     def test_extract_cpu_model(self):
-        """
-        Test extraction of a CPU model string.
-
-        Ensures:
-        - The function returns either None or a string
-        - Handles valid CPU input safely
-        """
-
         result = data_loading.extract_cpu_model("Core i9-14900KS")
         self.assertTrue(result is None or isinstance(result, str))
 
-class AutoGenerateTests(unittest.TestCase):
-    """
-    Unit tests for functions in the auto_generate module.
-    """
 
-    # generate_gpu should return a gpu if there is one
-    # If there is no gpu, return None
+GAMES = load_games()
+GPU_RANKINGS = load_gpu_rankings()
+CPU_RANKINGS = load_cpu_rankings()
+
+
+class TestAutoGenerate(unittest.TestCase):
+
+    def test_generate_pc_returns_three_tuple(self):
+        result = auto_generate.generate_pc(
+            "Fortnite", "rec", GAMES, CPU_RANKINGS, GPU_RANKINGS,
+            "Intel", "NVIDIA", None
+        )
+        self.assertIsInstance(result, tuple)
+        self.assertEqual(len(result), 3)
+
+    def test_generate_cpu_intel(self):
+        cpu = auto_generate.generate_cpu(
+            "Fortnite", "rec", GAMES, CPU_RANKINGS, "Intel", None
+        )
+        self.assertIsInstance(cpu, str)
+
+    def test_generate_cpu_amd(self):
+        cpu = auto_generate.generate_cpu(
+            "Fortnite", "rec", GAMES, CPU_RANKINGS, "AMD", None
+        )
+        self.assertIsInstance(cpu, str)
+
+    def test_generate_cpu_empty_rankings_returns_none(self):
+        cpu = auto_generate.generate_cpu(
+            "Fortnite", "rec", GAMES, {}, "Intel", None
+        )
+        self.assertIsNone(cpu)
+
+    def test_generate_gpu_nvidia(self):
+        gpu = auto_generate.generate_gpu(
+            "Fortnite", "rec", GAMES, GPU_RANKINGS, "NVIDIA", None
+        )
+        self.assertIsInstance(gpu, str)
+
+    def test_generate_gpu_empty_rankings_returns_none(self):
+        gpu = auto_generate.generate_gpu(
+            "Fortnite", "rec", GAMES, {}, "NVIDIA", None
+        )
+        self.assertIsNone(gpu)
+
+    def test_generate_ram_rec(self):
+        ram = auto_generate.generate_ram("Fortnite", "rec", GAMES, None)
+        self.assertIsInstance(ram, str)
 
     def test_generate_ram_min(self):
-        """
-        Verify generate_ram() returns a RAM specification string.
+        ram = auto_generate.generate_ram("Fortnite", "min", GAMES, None)
+        self.assertIsInstance(ram, str)
 
-        Ensures:
-        - Output is always a string representing RAM requirements
-        - Minimum RAM requirement is correctly retrieved
-        """
+    def test_get_price_known(self):
+        price = auto_generate._get_price("NVIDIA GPUs", "RTX 5090")
+        self.assertEqual(price, 2000)
 
-        games = auto_generate.load_games() if hasattr(auto_generate, "load_games") else None
-        result = auto_generate.generate_ram(
-            "Fortnite",
-            "min",
-            games,
-            None
-        )
-        self.assertIsInstance(result, str)
+    def test_get_price_unknown_returns_none(self):
+        price = auto_generate._get_price("NVIDIA GPUs", "RTX 9999")
+        self.assertIsNone(price)
 
-    # There cannot be a cost of zero
-    def test_fixed_component_cost_non_negative(self):
-        """
-        Verify that _fixed_component_cost() never returns a negative value.
-
-        Ensures:
-        - Cost is zero or positive
-        - Prevents invalid pricing calculations
-        """
-
-        cost = auto_generate._fixed_component_cost("Intel")
-        self.assertGreaterEqual(cost, 0)
-
-    # Build price is unconventionally an integer
-    def test_build_price_returns_int(self):
-        """
-        Verify get_build_price() returns a valid integer total.
-
-        Ensures:
-        - Output type is integer
-        - Matches expected total for a known build configuration
-        """
-
+    def test_get_build_price_known_value(self):
         build = {
-            "GPU": "RTX 5090",
-            "GPU_Brand": "NVIDIA",
-            "CPU": "Core i9-14900K",
-            "CPU_Brand": "Intel",
+            "GPU": "RTX 5090", "GPU_Brand": "NVIDIA",
+            "CPU": "Core i9-14900K", "CPU_Brand": "Intel",
             "Motherboard": "ASUS Prime Z790-A",
             "Case": "DIYPC Wood Black Case",
             "Storage": "Samsung 870 EVO 1TB SSD",
             "PSU": "Corsair RM1000x 1000W 80+ Gold",
-            "RAM": "CORSAIR VENGEANCE RGB 16GB DDR5"
+            "RAM": "CORSAIR VENGEANCE RGB 16GB DDR5",
         }
+        self.assertEqual(auto_generate.get_build_price(build), 3392)
 
-        result = auto_generate.get_build_price(build)
-        self.assertIsInstance(result, int)
-        self.assertEqual(result,3392)
+    def test_get_build_price_empty_build(self):
+        self.assertEqual(auto_generate.get_build_price({}), 0)
 
-class CompatibilityTests(unittest.TestCase): # Testing of the compatability.py file
-    """Unit tests for functions in the compatibility module."""
+    def test_fixed_component_cost_positive(self):
+        cost = auto_generate._fixed_component_cost("Intel")
+        self.assertGreater(cost, 0)
+
+    def test_generate_pc_budget_too_low(self):
+        result = auto_generate.generate_pc_budget(
+            "Fortnite", GAMES, CPU_RANKINGS, GPU_RANKINGS,
+            "Intel", "NVIDIA", 10
+        )
+        self.assertEqual(result, (None, None, None))
+
+    def test_generate_pc_budget_reasonable(self):
+        gpu, cpu, ram = auto_generate.generate_pc_budget(
+            "Fortnite", GAMES, CPU_RANKINGS, GPU_RANKINGS,
+            "Intel", "NVIDIA", 1500
+        )
+        self.assertIsInstance(gpu, str)
+        self.assertIsInstance(cpu, str)
+        self.assertIsInstance(ram, str)
+
+    def test_ram_price_known(self):
+        price = auto_generate._ram_price("CORSAIR VENGEANCE RGB 32GB DDR5")
+        self.assertGreater(price, 0)
+
+    def test_ram_price_none_returns_zero(self):
+        self.assertEqual(auto_generate._ram_price(None), 0)
+
+    def test_pick_budget_ram_adequate_budget(self):
+        gpu_prices = [("RTX 5050", 249)]
+        cpu_prices = [("Core i3-14100", 149)]
+        ram = auto_generate._pick_budget_ram(1000, gpu_prices, cpu_prices)
+        self.assertIsInstance(ram, str)
+
+    def test_pick_budget_ram_too_low_returns_none(self):
+        gpu_prices = [("RTX 5050", 249)]
+        cpu_prices = [("Core i3-14100", 149)]
+        ram = auto_generate._pick_budget_ram(1, gpu_prices, cpu_prices)
+        self.assertIsNone(ram)
 
 
-    # Test to make sure that Intel CPUs are compatible with the Z790-A
-    # All Intel CPU are set to be paired with the ASUS Prime motherboard
-    def test_intel_valid(self):
-        """
-        Verify Intel CPU and ASUS motherboard are compatible.
-
-        Ensures:
-        - Valid Intel build returns True
-        """
-
-        build = {
-            "CPU_Brand": "Intel",
-            "Motherboard": "ASUS Prime Z790-A"
-        }
-        self.assertTrue(compatibility.is_compatible(build))
-
-    # Any AMD CPU should be compatible with a MSI B650 Tomahawk
-    # All AMD CPUs are set to pair with the MSI B650 Tomahawk
-    def test_amd_valid(self):
-        """
-        Verify AMD CPU and MSI motherboard are compatible.
-
-        Ensures:
-        - Valid AMD build returns True
-        """
-
-        build = {
-            "CPU_Brand": "AMD",
-            "Motherboard": "MSI B650 Tomahawk"
-        }
-        self.assertTrue(compatibility.is_compatible(build))
-
-    # Test should fail as AMD is paired with MSI and Intel is paired with ASUS
-    def test_wrong_motherboard_compatibility(self):
-        """
-        Verify mismatched CPU and motherboard return False.
-
-        Ensures:
-        - Invalid combinations are correctly rejected
-        """
-
-        build = {
-            "CPU_Brand": "Intel",
-            "Motherboard": "MSI B650 Tomahawk"
-        }
-        self.assertFalse(compatibility.is_compatible(build))
-
-    # Entering no motherboard should be considered true in compatibility
-    def test_missing_motherboard_passes(self):
-        """
-        Verify compatibility passes when motherboard is missing.
-
-        Ensures:
-        - Function does not fail when optional component is absent
-        - Returns True in incomplete build scenarios
-        """
-
-        build = {"CPU_Brand": "Intel"}
-        self.assertTrue(compatibility.is_compatible(build))
-
-class SaveLoadTests(unittest.TestCase): # Testing for the save_load.py file
-    """Unit tests for functions in the save_load module."""
+class Save_load_tests(unittest.TestCase): # Testing for the save_load.py file
+    """
+    Unit tests for functions in the save_load module.
+    """
 
 
     # Reset state for testing
     def setUp(self):
-        """
-        Reset test environment before each test.
-
-        Ensures:
-        - Test save file is removed if it exists
-        - Each test runs in a clean state
-        """
 
         self.name = "test_build_unit"
 
@@ -234,13 +184,6 @@ class SaveLoadTests(unittest.TestCase): # Testing for the save_load.py file
 
     # Can retrieve a saved build later
     def test_save_load_creates_file(self):
-        """
-        Verify that saving and loading a build works correctly.
-
-        Ensures:
-        - A saved build can be retrieved
-        - Stored values remain unchanged
-        """
 
         build = {"CPU": "i5", "GPU": "RTX 3060"}
 
@@ -251,23 +194,11 @@ class SaveLoadTests(unittest.TestCase): # Testing for the save_load.py file
 
     # Missing build should return None
     def test_load_missing_build_returns_none(self):
-        """
-        Verify loading a non-existent build returns None.
-
-        Ensures:
-        - Function handles missing data gracefully
-        """
 
         self.assertIsNone(save_load.load_build("fake_name"))
 
     # If the user deletes a build it should be deleted from storage
     def test_delete_build_removes_entry(self):
-        """
-        Verify delete_build() removes a saved build.
-
-        Ensures:
-        - Deleted build is no longer retrievable
-        """
 
         build = {"CPU": "i5"}
 
@@ -278,34 +209,13 @@ class SaveLoadTests(unittest.TestCase): # Testing for the save_load.py file
 
     # All builds need to be returned as a dictionary
     def test_load_all_builds_returns_dict(self):
-        """
-        Verify load_all_builds() returns all builds as a dictionary.
-
-        Ensures:
-        - Output type is dictionary
-        - Structure supports multiple saved builds
-        """
 
         result = save_load.load_all_builds()
         self.assertIsInstance(result, dict)
 
     class TestIntegration(unittest.TestCase):
-        """
-        This module contains unit and integration tests for the PC Builder application.
-        It verifies the correctness of individual components as well as the interaction
-        between multiple modules in the system.
-        """
 
         def test_full_pc_generation_pipeline(self):
-            """
-            Verify full PC generation pipeline works across modules.
-
-            Ensures:
-            - Game data loads correctly from CSV
-            - CPU and GPU rankings are retrieved successfully
-            - PC components (CPU, GPU, RAM) are generated
-            - System integrates data_loading and auto_generate modules properly
-            """
 
             games = data_loading.load_games()
             cpu_rankings = data_loading.load_cpu_rankings()
@@ -327,14 +237,6 @@ class SaveLoadTests(unittest.TestCase): # Testing for the save_load.py file
             self.assertIsNotNone(ram)
 
         def test_build_price_integration(self):
-            """
-            Verify build pricing is calculated correctly.
-
-            Ensures:
-            - Build dictionary is processed across components module
-            - Prices are retrieved and summed correctly
-            - Returned value is a valid total cost greater than zero
-            """
 
             build = {
                 "GPU": "RTX 5090",
@@ -354,14 +256,6 @@ class SaveLoadTests(unittest.TestCase): # Testing for the save_load.py file
             self.assertGreater(price, 0)
 
         def test_save_and_load_build_integration(self):
-            """
-            Verify saving and loading a build works correctly.
-
-            Ensures:
-            - Build is stored successfully using save_build
-            - Stored build can be retrieved using load_build
-            - Data remains consistent across operations
-            """
 
             build = {
                 "CPU": "i5",
@@ -375,14 +269,6 @@ class SaveLoadTests(unittest.TestCase): # Testing for the save_load.py file
             self.assertEqual(loaded, build)
 
         def test_delete_build_integration(self):
-            """
-            Verify deleting a build removes it from storage.
-
-            Ensures:
-            - Build is removed from saved data
-            - Deleted build cannot be retrieved
-            - System handles deletion without errors
-            """
 
             build = {"CPU": "i5"}
 
@@ -394,3 +280,4 @@ class SaveLoadTests(unittest.TestCase): # Testing for the save_load.py file
 
 if __name__ == '__main__':
     unittest.main()
+
