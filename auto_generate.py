@@ -2,8 +2,11 @@ import components
 from data_loading import (load_games, load_gpu_rankings,
                           load_cpu_rankings, extract_cpu_model)
 
-# generate a list of parts for pc based on selected game and either min or recommended specs
-# this should be able to be modified somewhat easily to include amd gpus, all cpus, etc
+"""
+This module provides functionality for automatically generating PC component
+recommendations based on game requirements, user preferences, and budget constraints.
+"""
+
 
 
 def generate_pc(game_name, target_performance, game_list, cpu_rankings, gpu_rankings, cpu_brand, gpu_brand, algorithm):
