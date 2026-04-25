@@ -8,10 +8,9 @@ Version: Python 3.12
 # GUI built using Tkinter
 # Will contain all UI logic and code
 # UI library used: Tkinter
-
-import ttkbootstrap as ttk
 import tkinter as tk
 from tkinter import messagebox, simpledialog
+import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from components import hardware
 import auto_generate
